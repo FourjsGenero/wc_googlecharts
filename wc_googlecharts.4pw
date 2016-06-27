@@ -53,7 +53,7 @@
   </Settings>
   <LanguageList version="1.0"/>
   <PlatformList version="1.0"/>
-  <Group environment="dirlist:FGLIMAGEPATH=$(ProjectDir)/webcomponents;/Volumes/Daily/github/FourjsGenero/wc_googlecharts/trunk;." label="wc_googlecharts" language="Genero" targetDirectory="$(ProjectDir)">
+  <Group environment="dirlist:FGLIMAGEPATH=$(ProjectDir)/webcomponents;/Volumes/Daily/github/FourjsGenero/wc_googlecharts/trunk;$(FGLDIR)/lib/image2font.txt;$(FGLIMAGEPATH);." label="wc_googlecharts" language="Genero" targetDirectory="$(ProjectDir)">
     <Application binaryName="wc_googlecharts_test" id="18736" label="wc_googlecharts_test">
       <VirtualFolder label="gauge">
         <File filePath="wc_googlecharts_gauge_test.4gl"/>
@@ -76,6 +76,7 @@
       </VirtualFolder>
       <File filePath="wc_googlecharts_test.4gl"/>
       <File filePath="wc_googlecharts_test.4st"/>
+      <File filePath="wc_googlecharts_test.per"/>
     </Application>
   </Group>
 </Project>

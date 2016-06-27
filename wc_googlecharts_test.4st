@@ -2,6 +2,8 @@
 <StyleList>
   <Style name="Window">
     <StyleAttribute name="windowType" value="normal"/>
+    <StyleAttribute name="actionPanelPosition" value="bottom"/>
+    <StyleAttribute name="ringMenuPosition" value="bottom"/>
   </Style>
   <Style name="Window.main">
     <StyleAttribute name="windowType" value="normal"/>
