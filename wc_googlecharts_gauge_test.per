@@ -1,0 +1,91 @@
+LAYOUT (TEXT="GoogleCharts Gauge Test")
+HBOX
+GROUP (TEXT="Parameters")
+FOLDER
+PAGE (TEXT="Data")
+GRID
+{
+Title               [d01          ]
+Value               [d02          ]
+}
+END
+END
+PAGE (TEXT="Rendering")
+GRID
+{
+Width-Height        [r01   |r02   ]
+Minimum-Maximum     [r03   |r04   ]
+
+Major Ticks         <T t1         >
+                     [r05        ]
+                     [r05        ]
+                     [r05        ]
+                     [r05        ]
+                     [r05        ]
+                     [r05        ]
+                    <             > 
+Minor Ticks         [r06          ]
+Colour 1-From-To    [c01       |c02       |c03       ]
+Colour 2-From-To    [c04       |c05       |c06       ]
+Colour 3-From-To    [c07       |c08       |c09       ]
+}
+END
+END
+PAGE (TEXT="Animation")
+GRID
+{
+Duration               [a01          ]
+Easing                 [a02          ]
+}
+END
+END
+END
+END
+GROUP (TEXT="Gauge")
+GRID
+{
+[wc01                                                      ]
+[                                                          ]
+[                                                          ]
+[                                                          ]
+[                                                          ]
+[                                                          ]
+[                                                          ]
+[                                                          ]
+[                                                          ]
+[                                                          ]
+
+}
+END
+END
+END #HBOX
+END #LAYOUT
+ATTRIBUTES
+EDIT d01 = formonly.data_label, SCROLL;
+EDIT d02 = formonly.data_value, SCROLL, NOT NULL;
+
+EDIT r01 = formonly.WIDTH, NOT NULL;
+EDIT r02 = formonly.HEIGHT, NOT NULL;
+EDIT r03 = formonly.MIN, NOT NULL;
+EDIT r04 = formonly.MAX, NOT NULL;
+TABLE t1: t1;
+EDIT r05 = formonly.major_ticks, NOT NULL;
+SPINEDIT r06 = formonly.minor_ticks, VALUEMIN=0, STEP=1, NOT NULL;
+
+EDIT c01 = formonly.green_color;
+EDIT c02 = formonly.green_from;
+EDIT c03 = formonly.green_to;
+EDIT c04 = formonly.yellow_color;
+EDIT c05 = formonly.yellow_from;
+EDIT c06 = formonly.yellow_to;
+EDIT c07 = formonly.red_color;
+EDIT c08 = formonly.red_from;
+EDIT c09 = formonly.red_to;
+
+SPINEDIT a01 = formonly.duration, VALUEMIN=0, STEP=100, NOT NULL;
+COMBOBOX a02 = formonly.easing, ITEMS=("linear","in","out","inAndOut"), NOT NULL;
+
+WEBCOMPONENT wc01 = formonly.wc, COMPONENTTYPE="gc_gauge", SIZEPOLICY=FIXED, STRETCH=NONE, TABINDEX=0, HEIGHT=300 PIXELS, WIDTH=300 PIXELS;
+
+INSTRUCTIONS
+SCREEN RECORD major_ticks_scr(major_ticks);

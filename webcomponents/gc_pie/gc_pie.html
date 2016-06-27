@@ -1,0 +1,183 @@
+<html>
+   <head>
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <script type='text/javascript'>
+   google.charts.load("current", {packages:["corechart"]});
+   google.charts.setOnLoadCallback(drawChart);
+
+   function iis_int(value){
+      if((parseFloat(value) == parseInt(value)) && !isNaN(value)){
+         return parseInt(value);
+      } else {
+         return value;
+      }
+   }
+
+   function drawChart() {
+   }
+
+   onICHostReady = function(version) {
+      var myProps;
+
+      if ( version != 1.0 ) {
+         alert('Invalid API version');
+         return;
+      }
+
+      draw_pie = function(p) {
+
+         properties = eval('(' + p + ')');
+
+         var data = new google.visualization.DataTable();
+
+         /* New */
+         var colLength = parseInt(properties.data_col_count);
+         var rowLength = parseInt(properties.data_row_count);
+
+         for (var k=0; k < colLength; k++) {
+            if (properties.data_column[k].label) {
+                data.addColumn(properties.data_column[k].type, properties.data_column[k].label);
+            }
+            else
+            {
+                var r = {};
+                r["type"] = properties.data_column[k].type;
+                r["role"] = properties.data_column[k].role;
+                data.addColumn(r);
+            }
+         }
+
+         data.addRows(rowLength);
+
+         for (var i=0; i < rowLength; i++) {
+            for (var j=0; j < colLength; j++) {
+                data.setValue(i,j, properties.data[i][j]);
+            }
+         }
+ 
+         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+
+         var options  = {
+
+                          backgroundColor: {
+                                            strokeWidth: properties.background_color.stroke_width,
+                                            stroke: properties.background_color.stroke,
+                                            fill: properties.background_color.fill
+                                           } ,
+                          chartArea: {
+                                      backgroundColor: {
+                                            strokeWidth: properties.chart_area.background_color.stroke_width,
+                                            stroke: properties.chart_area.background_color.stroke,
+                                      },  
+                                      left: properties.chart_area.left,
+                                      top: properties.chart_area.top,
+                                      width: properties.chart_area.width,
+                                      height: properties.chart_area.height
+                                     } ,
+                          colors: properties.colors,
+                          fontSize: properties.font_size,
+                          fontName: properties.font_name,
+                          height: properties.height,
+                          is3D: properties.is3d,
+                          legend: {
+                                   alignment: properties.legend.alignment,
+                                   position: properties.legend.position,
+                                   maxLines: properties.legend.max_lines,
+                                   textStyle: {
+                                               color: properties.legend.text_style.color,
+                                               fontName: properties.legend.text_style.font_name,
+                                               fontSize: properties.legend.text_style.font_size,
+                                               bold: properties.legend.text_style.bold,
+                                               italic: properties.legend.text_style.italic
+                                               }
+                                  } ,
+                          pieHole: properties.pie_hole,
+                          pieSliceBorderColor: properties.pie_slice.border_color,
+                          pieSliceText: properties.pie_slice.text,
+                          pieSliceTextStyle: {
+                                              color: properties.pie_slice.text_style.color,
+                                              fontName: properties.pie_slice.text_style.font_name,
+                                              fontSize: properties.pie_slice.text_style.font_size
+                                              }  ,
+                          pieStartAngle: properties.pie_start_angle,
+                          reverseCategories: properties.reverse_categories,
+                          
+                          pieResidueSliceColor: properties.pie_residue_slice_color,
+                          pieResidueSliceLabel: properties.pie_residue_slice_label ,
+
+                          slices:  properties.slices.map(function(o) {
+                                var n = {};
+                                n["color"] = o.color;
+                                n["offset"] = o.offset;
+                                n["textStyle"] = {
+                                    color : o.text_style_color,
+                                    fontName : o.text_style_font_name,
+                                    fontSize : o.text_style_font_size
+                                    };
+                                return n;
+                          }),
+
+                          sliceVisibilityThreshold: properties.slice_visibility_threshold,
+                          
+                          title: properties.title,
+                          titleTextStyle: {
+                                           color: properties.title_text_style.color,
+                                           fontName: properties.title_text_style.font_name,
+                                           fontSize: properties.title_text_style.font_size,
+                                           bold: properties.title_text_style.bold,
+                                           italic: properties.title_text_style.italic
+                                          } ,
+                          tooltip: {
+                                    ignoreBounds: properties.tooltip.ignore_bounds,
+                                    isHtml: properties.tooltip.is_html,
+                                    showColorCode: properties.tooltip.show_color_code,
+                                    text: properties.tooltip.text,
+                                    textStyle: {
+                                                color: properties.tooltip.text_style.color,
+                                                fontName: properties.tooltip.text_style.font_name,
+                                                fontSize: properties.tooltip.text_style.font_size,
+                                                bold: properties.tooltip.text_style.bold,
+                                                italic: properties.tooltip.text_style.italic
+                                               },
+                                    trigger: properties.tooltip.trigger
+                                   },
+                          width: properties.width
+                        
+                        };
+
+         chart.draw(data, options);
+
+         google.visualization.events.addListener(chart,'select', selectHandler);
+         google.visualization.events.addListener(chart,'onmouseover', onmouseoverHandler);
+
+         function selectHandler(e) {
+            var selection = chart.getSelection();
+            var item = selection[0];
+            var idx = item.row + 1;
+
+            chartClicked(idx);
+         }
+
+         chartClicked = function( idx ) {
+            gICAPI.SetFocus();
+            gICAPI.SetData(idx);
+            gICAPI.Action('select');
+         }
+
+         function onmouseoverHandler(e) {
+            var item = [e.row];
+            var idx = parseInt(item) + 1;
+            gICAPI.SetFocus();
+            gICAPI.SetData(idx);
+            gICAPI.Action('mouseover');
+         }
+      }
+   }
+
+
+   </script>
+   </head>
+   <body>
+      <div id='chart_div'></div>
+   </body>
+</html>

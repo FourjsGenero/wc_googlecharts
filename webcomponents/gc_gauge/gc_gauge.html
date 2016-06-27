@@ -1,0 +1,79 @@
+<html>  
+    <head>    
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>   
+
+        <script type="text/javascript">
+            google.charts.load('current', {'packages':['gauge']});
+            google.charts.setOnLoadCallback(drawChart);
+
+   function drawChart() {        
+   }    
+     
+   onICHostReady = function(version) {
+      var myProps;
+
+      if ( version != 1.0 ) {
+         alert('Invalid API version');
+         return;
+      }
+
+      draw_gauge = function(p) {   
+   
+         properties = eval('(' + p + ')');
+        
+         var data = new google.visualization.DataTable(); 
+         data.addColumn('string', 'Label');        
+         data.addColumn('number', 'Value');        
+         data.addRows(1);        
+         
+         data.setValue(0, 0, properties.data_label); 
+         data.setValue(0, 1, parseFloat(properties.data_value));
+
+         var chart = new google.visualization.Gauge(document.getElementById('chart_div'));   
+         
+         var options = {animation:{
+                            duration: parseInt(properties.animation.duration),
+                            easing: properties.animation.easing
+                        },
+                        greenColor: properties.green_color,
+                        greenFrom: parseFloat(properties.green_from),
+                        greenTo: parseFloat(properties.green_to),
+                        height: parseInt(properties.height),
+                        majorTicks: properties.major_ticks,
+                        max: parseFloat(properties.max), 
+                        min: parseFloat(properties.min), 
+                        minorTicks: parseInt(properties.minor_ticks),
+                        redColor: properties.red_color, 
+                        redFrom: parseFloat(properties.red_from), 
+                        redTo: parseFloat(properties.red_to),
+                        width: parseInt(properties.width),
+                        yellowColor: properties.yellow_color, 
+                        yellowFrom: parseFloat(properties.yellow_from), 
+                        yellowTo: parseFloat(properties.yellow_to) };
+         chart.draw(data, options); 
+         
+         document.getElementById("gauge_div_clickable").setAttribute("style", "position:absolute; z-index:2;top:0px;left:0px;width:"+parseInt(properties.width)+"px;height:"+parseInt(properties.height)+"px;");
+
+         draw_gauge_value = function(v) {
+            data.setValue(0, 1, parseFloat(v));
+            chart.draw(data, options);
+        }
+    }
+
+      
+      gaugeClicked = function() {
+            gICAPI.SetFocus();
+            gICAPI.Action('select');
+         }
+   }
+
+
+   </script>
+   </head>  
+   <body>  
+      <div id='chart_div'></div>  
+      <div id='gauge_div_clickable' style='position:absolute; z-index:2;top:0px;left:0px;width:1px;height:1px;' onclick="gaugeClicked();">
+   </body>
+</html>
+
+

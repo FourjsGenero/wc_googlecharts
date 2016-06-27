@@ -1,0 +1,225 @@
+LAYOUT (TEXT="GoogleCharts Pie Test")
+HBOX
+FOLDER
+
+PAGE (TEXT="Data")
+TABLE
+{
+[d01       |d02       |d03       ][sl01       |sl02         |sl03         |sl04        |sl05        ]
+[d01       |d02       |d03       ][sl01       |sl02         |sl03         |sl04        |sl05        ]
+[d01       |d02       |d03       ][sl01       |sl02         |sl03         |sl04        |sl05        ]
+[d01       |d02       |d03       ][sl01       |sl02         |sl03         |sl04        |sl05        ]
+[d01       |d02       |d03       ][sl01       |sl02         |sl03         |sl04        |sl05        ]
+}
+END
+END
+
+PAGE (TEXT="Rendering")
+GRID
+{
+Width-Height        [r01      |r02      ]
+3D                  [r03                ]
+Font Size           [r04                ]
+Font Name           [r05                ]
+
+}
+END
+END
+
+PAGE (TEXT="Title")
+GRID
+{
+Title      [t01                ]
+Colour     [t02                ]
+Font Name  [t03                ]
+Font Size  [t04                ]
+Bold       [t05                ]
+Italic     [t06                ]
+}
+END
+END
+
+PAGE (TEXT="Background")
+GRID
+{
+Fill         [bk01      ]
+Stroke       [bk02      ]  
+Stroke-Width [bk03      ]    
+}
+END
+END
+
+PAGE (TEXT="Chart Area")
+GRID
+{
+Stroke       [ca01          ]  
+Stroke-Width [ca02          ]    
+Left-Top     [ca03   |ca04  ]
+Width-Height [ca05   |ca06  ]
+}
+END
+END
+
+PAGE (TEXT="Legend")
+GRID
+{
+Position     [lg02               ]
+Alignment    [lg01               ]
+Max Lines    [lg03               ]
+Color        [lg04               ]
+Font Name    [lg05               ]
+Font Size    [lg06               ]
+Bold         [lg07               ]
+Italic       [lg08               ]
+}
+END
+END
+
+PAGE(TEXT="Pie Slices")
+GRID
+{
+Pie Hole           [ph01               ]
+Border Color       [ph02               ]
+Text               [ph03               ]
+Color              [ph04               ]
+Font Name          [ph05               ]
+Font Size          [ph06               ]
+Start Angle        [ph07               ]
+Reverse Categories [ph08               ] 
+}
+END
+END
+
+PAGE(TEXT="Residue Slice")
+GRID
+{
+Visibility Threshold  [rs01              ]
+Color                 [rs02              ]
+Label                 [rs03              ] 
+}
+END
+END
+
+PAGE(TEXT="Colors")
+TABLE
+{
+[co01                 ]
+[co01                 ]
+[co01                 ]
+[co01                 ]
+[co01                 ]
+}
+END
+END
+
+PAGE(TEXT="Tooltip")
+GRID
+{
+Ignore Bounds         [tt01              ]
+Is Html               [tt02              ]
+Show Color Code       [tt03              ]
+Text                  [tt04              ]
+Color                 [tt05              ]
+Font Name             [tt06              ]
+Font Size             [tt07              ]
+Bold                  [tt08              ]
+Italic                [tt09              ]
+Trigger               [tt10              ]
+}
+END
+END
+END
+GROUP (TEXT="Pie")
+GRID
+{
+[wc01                                                      ]
+[                                                          ]
+[                                                          ]
+[                                                          ]
+[                                                          ]
+[                                                          ]
+[                                                          ]
+[                                                          ]
+[                                                          ]
+[                                                          ]
+}
+END
+END
+END 
+END 
+ATTRIBUTES
+
+EDIT d01 = formonly.data_label, SCROLL, TITLE="Label";
+EDIT d02 = formonly.data_value, SCROLL, TITLE="Value";
+EDIT d03 = formonly.data_tooltip, SCROLL, TITLE="Tooltip";
+
+EDIT t01 = formonly.title, SCROLL;
+EDIT t02 = formonly.title_text_style_color;
+EDIT t03 = formonly.title_text_style_font_name;
+EDIT t04 = formonly.title_text_style_font_size;
+CHECKBOX t05 = formonly.title_text_style_bold, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
+CHECKBOX t06 = formonly.title_text_style_italic, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
+
+EDIT r01 = formonly.WIDTH, NOT NULL;
+EDIT r02 = formonly.HEIGHT, NOT NULL;
+CHECKBOX r03 = formonly.is3d, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
+SPINEDIT r04 = formonly.font_size, VALUEMIN=0;
+EDIT r05 = formonly.font_name;
+
+EDIT bk01 = formonly.background_color_fill;
+EDIT bk02 = formonly.background_color_stroke;
+SPINEDIT bk03 = formonly.background_color_stroke_width, VALUEMIN=0;
+
+EDIT ca01 = formonly.chart_area_background_color_stroke;
+SPINEDIT ca02 = formonly.chart_area_background_color_stroke_width, VALUEMIN=0;
+SPINEDIT ca03 = formonly.chart_area_left, VALUEMIN=0;
+SPINEDIT ca04 = formonly.chart_area_top, VALUEMIN=0;
+SPINEDIT ca05 = formonly.chart_area_width, VALUEMIN=0;
+SPINEDIT ca06 = formonly.chart_area_height, VALUEMIN=0;
+
+COMBOBOX lg01 = formonly.legend_alignment, ITEMS=("start","center","end");
+COMBOBOX lg02 = formonly.legend_position, ITEMS=("none", "left", "right", "bottom", "top", "labeled");
+SPINEDIT lg03 = formonly.legend_max_lines, VALUEMIN=0;
+EDIT lg04 = formonly.legend_text_style_color;
+EDIT lg05 = formonly.legend_text_style_font_name;
+SPINEDIT lg06 = formonly.legend_text_style_font_size, VALUEMIN=0;
+CHECKBOX lg07 = formonly.legend_text_style_bold, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
+CHECKBOX lg08 = formonly.legend_text_style_italic, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
+
+EDIT ph01 = formonly.pie_hole;
+EDIT ph02 = formonly.pie_slice_border_color;
+COMBOBOX ph03 = formonly.pie_slice_text, ITEMS=("percentage","value","label","none");
+EDIT ph04 = formonly.pie_slice_text_style_color;
+EDIT ph05 = formonly.pie_slice_text_style_font_name;
+SPINEDIT ph06 = formonly.pie_slice_text_style_font_size, VALUEMIN=0;
+EDIT ph07 = formonly.pie_start_angle;
+CHECKBOX ph08 = formonly.reverse_categories, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE; 
+
+EDIT rs01 = formonly.slice_visibility_threshold;
+EDIT rs02 = formonly.pie_residue_slice_color;
+EDIT rs03 = formonly.pie_residue_slice_label, SCROLL;
+
+EDIT co01 = formonly.COLOR,NOT NULL, TITLE="Color";
+
+EDIT sl01 = formonly.slice_color, TITLE="Color";
+EDIT sl02 = formonly.slice_offset, TITLE="Offset";
+EDIT sl03 = formonly.slice_text_style_color, TITLE="Text Color";
+EDIT sl04 = formonly.slice_text_style_font_name, TITLE="Font Name";
+EDIT sl05 = formonly.slice_text_style_font_size, TITLE="Font Size";
+
+CHECKBOX tt01 = formonly.tooltip_ignore_bounds, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE; 
+CHECKBOX tt02 = formonly.tooltip_is_html, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE; 
+CHECKBOX tt03 = formonly.tooltip_show_color_code, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE; 
+COMBOBOX tt04 = formonly.tooltip_text, ITEMS=('both','value','percentage');
+EDIT tt05 = formonly.tooltip_text_style_color;
+EDIT tt06 = formonly.tooltip_text_style_font_name;
+EDIT tt07 = formonly.tooltip_text_style_font_size;
+CHECKBOX tt08 = formonly.tooltip_text_style_bold, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
+CHECKBOX tt09 = formonly.tooltip_text_style_italic, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
+COMBOBOX tt10 = formonly.tooltip_trigger, ITEMS=('focus','none','selection');
+
+WEBCOMPONENT wc01 = formonly.wc, COMPONENTTYPE="gc_pie", SIZEPOLICY=FIXED, STRETCH=NONE, TABINDEX=0, HEIGHT=300 PIXELS, WIDTH=300 PIXELS;
+
+INSTRUCTIONS
+SCREEN RECORD data_scr(data_label, data_value, data_tooltip, slice_color, slice_offset, slice_text_style_color, slice_text_style_font_name, slice_text_style_font_size);
+SCREEN RECORD colors_scr(COLOR);
