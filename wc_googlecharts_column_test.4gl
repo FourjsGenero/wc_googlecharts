@@ -76,12 +76,12 @@ DEFINE i INTEGER
         ATTRIBUTES (WITHOUT DEFAULTS=TRUE)
         END INPUT
 
-        --INPUT g.chart_area.background_color.stroke, g.chart_area.background_color.stroke_width,
-              --g.chart_area.left, g.chart_area.top, g.chart_area.width, g.chart_area.height
-        --FROM  chart_area_background_color_stroke, chart_area_background_color_stroke_width,
-              --chart_area_left, chart_area_top, chart_area_width, chart_area_height
-        --ATTRIBUTES (WITHOUT DEFAULTS=TRUE)
-        --END INPUT
+        INPUT g.chart_area.background_color.stroke, g.chart_area.background_color.stroke_width,
+              g.chart_area.left, g.chart_area.top, g.chart_area.width, g.chart_area.height
+        FROM  chart_area_background_color_stroke, chart_area_background_color_stroke_width,
+              chart_area_left, chart_area_top, chart_area_width, chart_area_height
+        ATTRIBUTES (WITHOUT DEFAULTS=TRUE)
+        END INPUT
 
         --INPUT g.legend.alignment, g.legend.position, g.legend.max_lines,
               --g.legend.text_style.color, g.legend.text_style.font_name, g.legend.text_style.font_size, g.legend.text_style.bold, g.legend.text_style.italic

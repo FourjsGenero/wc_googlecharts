@@ -47,6 +47,17 @@ Stroke-Width [bk03      ]
 END
 END
 
+PAGE (TEXT="Chart Area")
+GRID
+{
+Stroke       [ca01          ]  
+Stroke-Width [ca02          ]    
+Left-Top     [ca03   |ca04  ]
+Width-Height [ca05   |ca06  ]
+}
+END
+END
+
 END
 GROUP (TEXT="Line")
 GRID
@@ -88,6 +99,13 @@ EDIT r05 = formonly.font_name;
 EDIT bk01 = formonly.background_color_fill;
 EDIT bk02 = formonly.background_color_stroke;
 SPINEDIT bk03 = formonly.background_color_stroke_width, VALUEMIN=0;
+
+EDIT ca01 = formonly.chart_area_background_color_stroke;
+SPINEDIT ca02 = formonly.chart_area_background_color_stroke_width, VALUEMIN=0;
+SPINEDIT ca03 = formonly.chart_area_left, VALUEMIN=0;
+SPINEDIT ca04 = formonly.chart_area_top, VALUEMIN=0;
+SPINEDIT ca05 = formonly.chart_area_width, VALUEMIN=0;
+SPINEDIT ca06 = formonly.chart_area_height, VALUEMIN=0;
 
 WEBCOMPONENT wc01 = formonly.wc, COMPONENTTYPE="gc_line", SIZEPOLICY=FIXED, STRETCH=NONE, TABINDEX=0, HEIGHT=300 PIXELS, WIDTH=300 PIXELS;
 
