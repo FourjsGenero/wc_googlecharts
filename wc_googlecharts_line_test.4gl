@@ -90,14 +90,14 @@ DEFINE i INTEGER
         ATTRIBUTES (WITHOUT DEFAULTS=TRUE)
         END INPUT
 
-        --INPUT g.tooltip.ignore_bounds, g.tooltip.is_html, g.tooltip.show_color_code, g.tooltip.text,
-        --g.tooltip.text_style.color, g.tooltip.text_style.font_name, g.tooltip.text_style.font_size, g.tooltip.text_style.bold, g.tooltip.text_style.italic, 
-        --g.tooltip.trigger
-        --FROM tooltip_ignore_bounds, tooltip_is_html, tooltip_show_color_code, tooltip_text,
-        --tooltip_text_style_color, tooltip_text_style_font_name, tooltip_text_style_font_size, tooltip_text_style_bold, tooltip_text_style_italic, 
-        --tooltip_trigger
-        --ATTRIBUTES (WITHOUT DEFAULTS=TRUE)
-        --END INPUT
+        INPUT g.tooltip.ignore_bounds, g.tooltip.is_html, g.tooltip.show_color_code, {g.tooltip.text,}
+        g.tooltip.text_style.color, g.tooltip.text_style.font_name, g.tooltip.text_style.font_size, g.tooltip.text_style.bold, g.tooltip.text_style.italic, 
+        g.tooltip.trigger
+        FROM tooltip_ignore_bounds, tooltip_is_html, tooltip_show_color_code, {tooltip_text,}
+        tooltip_text_style_color, tooltip_text_style_font_name, tooltip_text_style_font_size, tooltip_text_style_bold, tooltip_text_style_italic, 
+        tooltip_trigger
+        ATTRIBUTES (WITHOUT DEFAULTS=TRUE)
+        END INPUT
 
         --INPUT ARRAY g.colors 
         --FROM colors_scr.*

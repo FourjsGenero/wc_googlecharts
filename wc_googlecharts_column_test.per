@@ -73,6 +73,22 @@ Italic       [lg08               ]
 END
 END
 
+PAGE(TEXT="Tooltip")
+GRID
+{
+Ignore Bounds         [tt01              ]
+Is Html               [tt02              ]
+Show Color Code       [tt03              ]
+Color                 [tt05              ]
+Font Name             [tt06              ]
+Font Size             [tt07              ]
+Bold                  [tt08              ]
+Italic                [tt09              ]
+Trigger               [tt10              ]
+}
+END
+END
+
 
 END
 GROUP (TEXT="Column")
@@ -131,6 +147,18 @@ EDIT lg05 = formonly.legend_text_style_font_name;
 SPINEDIT lg06 = formonly.legend_text_style_font_size, VALUEMIN=0;
 CHECKBOX lg07 = formonly.legend_text_style_bold, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
 CHECKBOX lg08 = formonly.legend_text_style_italic, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
+
+CHECKBOX tt01 = formonly.tooltip_ignore_bounds, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE; 
+CHECKBOX tt02 = formonly.tooltip_is_html, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE; 
+CHECKBOX tt03 = formonly.tooltip_show_color_code, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE; 
+#COMBOBOX tt04 = formonly.tooltip_text, ITEMS=('both','value','percentage');
+EDIT tt05 = formonly.tooltip_text_style_color;
+EDIT tt06 = formonly.tooltip_text_style_font_name;
+EDIT tt07 = formonly.tooltip_text_style_font_size;
+CHECKBOX tt08 = formonly.tooltip_text_style_bold, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
+CHECKBOX tt09 = formonly.tooltip_text_style_italic, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
+COMBOBOX tt10 = formonly.tooltip_trigger, ITEMS=('focus','none','selection');
+
 
 WEBCOMPONENT wc01 = formonly.wc, COMPONENTTYPE="gc_column", SIZEPOLICY=FIXED, STRETCH=NONE, TABINDEX=0, HEIGHT=300 PIXELS, WIDTH=300 PIXELS;
 

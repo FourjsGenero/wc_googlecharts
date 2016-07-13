@@ -154,7 +154,7 @@ PUBLIC TYPE line_rec RECORD
         ignore_bounds BOOLEAN,
         is_html BOOLEAN,
         show_color_code BOOLEAN,
-        text STRING,
+--        text STRING,
         text_style RECORD
             color STRING,
             font_name STRING,
