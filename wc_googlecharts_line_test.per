@@ -24,6 +24,19 @@ Font Name           [r05                ]
 END
 END
 
+PAGE (TEXT="Title")
+GRID
+{
+Title      [t01                ]
+Colour     [t02                ]
+Font Name  [t03                ]
+Font Size  [t04                ]
+Bold       [t05                ]
+Italic     [t06                ]
+}
+END
+END
+
 END
 GROUP (TEXT="Line")
 GRID
@@ -48,6 +61,13 @@ ATTRIBUTES
 EDIT d01 = formonly.data_label, SCROLL, TITLE="Label";
 EDIT d02 = formonly.data_value, SCROLL, TITLE="Value";
 EDIT d03 = formonly.data_tooltip, SCROLL, TITLE="Tooltip";
+
+EDIT t01 = formonly.title, SCROLL;
+EDIT t02 = formonly.title_text_style_color;
+EDIT t03 = formonly.title_text_style_font_name;
+EDIT t04 = formonly.title_text_style_font_size;
+CHECKBOX t05 = formonly.title_text_style_bold, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
+CHECKBOX t06 = formonly.title_text_style_italic, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
 
 EDIT r01 = formonly.WIDTH, NOT NULL;
 EDIT r02 = formonly.HEIGHT, NOT NULL;

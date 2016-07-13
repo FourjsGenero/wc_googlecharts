@@ -63,11 +63,10 @@ DEFINE i INTEGER
         INPUT ARRAY data FROM data_scr.* ATTRIBUTES(WITHOUT DEFAULTS=TRUE)
         END INPUT
 
-        --INPUT g.title, g.title_text_style.color, g.title_text_style.font_name, g.title_text_style.font_size, g.title_text_style.bold, g.title_text_style.italic
-        --FROM title, title_text_style_color, title_text_style_font_name, title_text_style_font_size, title_text_style_bold, title_text_style_italic
---
-        --ATTRIBUTES(WITHOUT DEFAULTS=TRUE)
-        --END INPUT
+        INPUT g.title, g.title_text_style.color, g.title_text_style.font_name, g.title_text_style.font_size, g.title_text_style.bold, g.title_text_style.italic
+        FROM title, title_text_style_color, title_text_style_font_name, title_text_style_font_size, title_text_style_bold, title_text_style_italic
+        ATTRIBUTES(WITHOUT DEFAULTS=TRUE)
+        END INPUT
 
         INPUT BY NAME g.width, g.height,  g.font_size, g.font_name ATTRIBUTES(WITHOUT DEFAULTS=TRUE) 
         END INPUT
