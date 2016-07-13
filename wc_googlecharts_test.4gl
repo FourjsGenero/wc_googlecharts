@@ -20,7 +20,13 @@ MAIN
 
         ON ACTION column ATTRIBUTES(TEXT="Column")
             CALL googlecharts_column_test()
-
+            
+        ON ACTION geo ATTRIBUTES(TEXT="Geo")
+            CALL FGL_WINMESSAGE("Info","Not yet implemented","stop")
+            
+        ON ACTION visualization ATTRIBUTES(TEXT="Visualization")
+            CALL FGL_WINMESSAGE("Info","Not yet implemented","stop")
+            
         ON ACTION close
             EXIT MENU
     END MENU
