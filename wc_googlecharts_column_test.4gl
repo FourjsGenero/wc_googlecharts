@@ -145,20 +145,6 @@ DEFINE i INTEGER
             LET g.data_row_count = data.getLength()
             CALL gc_column.draw("formonly.wc", g.*)
 
-        ON ACTION random ATTRIBUTES(TEXT="Random")
-            -- randomise data
-            FOR i = 1 TO data.getLength()
-                --LET data[i].value1 = util.Math.rand(30)+1
-                --LET data[i].value2 = util.Math.rand(30)+1
-                --LET data[i].value3 = util.Math.rand(30)+1
-                --LET data[i].value4 = util.Math.rand(30)+1
-                --LET data[i].value5 = util.Math.rand(30)+1
-                --LET data[i].value6 = util.Math.rand(30)+1
-            END FOR
-            LET g.data_col_count = g.data_column.getLength()
-            CALL map_array_to_data(base.TypeInfo.create(data), g.data,  g.data_col_count)
-            CALL gc_column.draw("formonly.wc", g.*)
-
         ON ACTION example1 ATTRIBUTES(TEXT="Example 1")
             CALL g.data_column.clear()
             CALL data.clear()
@@ -240,15 +226,6 @@ DEFINE i INTEGER
 
             LET g.data_column[7].label = "Literature"
             LET g.data_column[7].type = "number"
-
-            LET g.data_column[8].role = "style"
-            LET g.data_column[8].type = "string"
-    
-            LET g.data_column[9].role = "tooltip"
-            LET g.data_column[9].type = "string"
-    
-            LET g.data_column[10].role = "annotation"
-            LET g.data_column[10].type = "string"
 
             LET data[1].col01 = "2010" LET data[1].col02 = 10 LET data[1].col03 = 24 LET data[1].col04 = 20 LET data[1].col05 = 32 LET data[1].col06 = 18 LET data[1].col07 = 5  
             LET data[2].col01 = "2011" LET data[2].col02 = 16 LET data[2].col03 = 22 LET data[2].col04 = 23 LET data[2].col05 = 30 LET data[2].col06 = 16 LET data[2].col07 = 9  
