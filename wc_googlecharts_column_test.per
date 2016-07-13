@@ -3,12 +3,21 @@ HBOX
 FOLDER
 
 PAGE (TEXT="Data")
+HBOX
 TABLE
 {
-[d01       |d02       |d03       ]
-[d01       |d02       |d03       ]
-[d01       |d02       |d03       ]
+[dc01       |dc02     |dc03     ]
+[dc01       |dc02     |dc03     ]
+[dc01       |dc02     |dc03     ]
 }
+END
+TABLE
+{
+[d01       |d02       |d03       |d04      |d05       |d06       |d07      |d08      |d09        |d10      ]
+[d01       |d02       |d03       |d04      |d05       |d06       |d07      |d08      |d09        |d10      ]
+[d01       |d02       |d03       |d04      |d05       |d06       |d07      |d08      |d09        |d10      ]
+}
+END
 END
 END
 
@@ -123,9 +132,20 @@ END
 END
 END
 ATTRIBUTES
-EDIT d01 = formonly.data_label, SCROLL, TITLE="Label";
-EDIT d02 = formonly.data_value, SCROLL, TITLE="Value";
-EDIT d03 = formonly.data_tooltip, SCROLL, TITLE="Tooltip";
+EDIT dc01 = formonly.datatype, TITLE="Datatype", SCROLL;
+EDIT dc02 = formonly.LABEL, TITLE="Label", SCROLL;
+EDIT dc03 = formonly.role, TITLE="Role", SCROLL;
+
+EDIT d01 = formonly.col01, SCROLL;
+EDIT d02 = formonly.col02, SCROLL;
+EDIT d03 = formonly.col03, SCROLL;
+EDIT d04 = formonly.col04, SCROLL;
+EDIT d05 = formonly.col05, SCROLL;
+EDIT d06 = formonly.col06, SCROLL;
+EDIT d07 = formonly.col07, SCROLL;
+EDIT d08 = formonly.col08, SCROLL;
+EDIT d09 = formonly.col09, SCROLL;
+EDIT d10 = formonly.col10, SCROLL;
 
 EDIT t01 = formonly.title, SCROLL;
 EDIT t02 = formonly.title_text_style_color;
@@ -178,7 +198,8 @@ WEBCOMPONENT wc01 = formonly.wc, COMPONENTTYPE="gc_column", SIZEPOLICY=FIXED, ST
 
 
 INSTRUCTIONS
-SCREEN RECORD data_scr(data_label, data_value, data_tooltip);
+SCREEN RECORD data_column_scr(datatype, LABEL, role);
+SCREEN RECORD data_scr(col01, col02, col03, col04, col05, col06, col07, col08, col09, col10);
 SCREEN RECORD colors_scr(COLOR);
 
 --3D                  [r03                ]

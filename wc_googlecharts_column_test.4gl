@@ -5,28 +5,35 @@ FUNCTION googlecharts_column_test()
 DEFINE g gc_column.column_rec
 DEFINE wc STRING
 DEFINE data DYNAMIC ARRAY OF RECORD
-    label STRING,
-    value STRING,
-    tooltip STRING
+    col01 STRING,
+    col02 STRING,
+    col03 STRING,
+    col04 STRING,
+    col05 STRING,
+    col06 STRING,
+    col07 STRING,
+    col08 STRING,
+    col09 STRING,
+    col10 STRING
 END RECORD
 DEFINE i INTEGER
 
     INITIALIZE g.* TO NULL
 
     -- Set the data
-    LET g.data_col_count = 3
-    LET g.data_row_count = 4
-    LET g.data_column[1].label = "Area"
-    LET g.data_column[1].type = "string"
-    LET g.data_column[2].label = "Sales"
-    LET g.data_column[2].type = "number"
-    LET g.data_column[3].role = "tooltip"
-    LET g.data_column[3].type = "string"
-
-    LET data[1].label = "North"      LET data[1].value = 1000
-    LET data[2].label = "East"       LET data[2].value = 2000
-    LET data[3].label = "South"      LET data[3].value = 3000
-    LET data[4].label = "West"       LET data[4].value = 4000
+    --LET g.data_col_count = 3
+    --LET g.data_row_count = 4
+    --LET g.data_column[1].label = "Area"
+    --LET g.data_column[1].type = "string"
+    --LET g.data_column[2].label = "Sales"
+    --LET g.data_column[2].type = "number"
+    --LET g.data_column[3].role = "tooltip"
+    --LET g.data_column[3].type = "string"
+--
+    --LET data[1].label = "North"      LET data[1].value = 1000
+    --LET data[2].label = "East"       LET data[2].value = 2000
+    --LET data[3].label = "South"      LET data[3].value = 3000
+    --LET data[4].label = "West"       LET data[4].value = 4000
 
     -- Set some minumum settings for the pie chart
     LET g.chart_area.left = 50
@@ -36,7 +43,26 @@ DEFINE i INTEGER
     LET g.height = 275
     LET g.title = "Example Column Chart"
     LET g.width = 275
-    LET g.colors[1] = "blue"
+    LET g.colors[1] = "#3366CC"
+    LET g.colors[2] = "#DC3912"
+    LET g.colors[3] = "#FF9900"
+    LET g.colors[4] = "#109618"
+    LET g.colors[5] = "#990099"
+    LET g.colors[6] = "#3B3EAC"
+    LET g.colors[7] = "#0099C6"
+    LET g.colors[8] = "#DD4477"
+    LET g.colors[9] = "#66AA00"
+    LET g.colors[10] = "#B82E2E"
+    LET g.colors[11] = "#316395"
+    LET g.colors[12] = "#994499"
+    LET g.colors[13] = "#22AA99"
+    LET g.colors[14] = "#AAAA11"
+    LET g.colors[15] = "#6633CC"
+    LET g.colors[16] = "#E67300"
+    LET g.colors[17] = "#8B0707"
+    LET g.colors[18] = "#329262"
+    LET g.colors[19] = "#5574A6"
+    LET g.colors[20] = "#3B3EAC"
 
     -- Other settings can be set programmatically similar to ...
     --LET g.title_text_style.color = "blue"
@@ -60,6 +86,9 @@ DEFINE i INTEGER
     OPEN WINDOW column_test WITH FORM "wc_googlecharts_column_test"
     
     DIALOG ATTRIBUTES(UNBUFFERED)
+        INPUT ARRAY g.data_column FROM data_column_scr.* ATTRIBUTES(WITHOUT DEFAULTS=TRUE)
+        END INPUT
+    
         INPUT ARRAY data FROM data_scr.* ATTRIBUTES(WITHOUT DEFAULTS=TRUE)
         END INPUT
 
@@ -110,16 +139,128 @@ DEFINE i INTEGER
 
         ON ACTION draw ATTRIBUTES(TEXT="Draw")
             LABEL lbl_draw:
-            CALL map_array_to_data(base.TypeInfo.create(data), g.data, "label","value","tooltip")
+            LET g.data_col_count = g.data_column.getLength()
+            CALL map_array_to_data(base.TypeInfo.create(data), g.data, g.data_col_count)
+            
             LET g.data_row_count = data.getLength()
             CALL gc_column.draw("formonly.wc", g.*)
 
         ON ACTION random ATTRIBUTES(TEXT="Random")
             -- randomise data
             FOR i = 1 TO data.getLength()
-                LET data[i].value = util.Math.rand(10000)+1
+                --LET data[i].value1 = util.Math.rand(30)+1
+                --LET data[i].value2 = util.Math.rand(30)+1
+                --LET data[i].value3 = util.Math.rand(30)+1
+                --LET data[i].value4 = util.Math.rand(30)+1
+                --LET data[i].value5 = util.Math.rand(30)+1
+                --LET data[i].value6 = util.Math.rand(30)+1
             END FOR
-            CALL map_array_to_data(base.TypeInfo.create(data), g.data, "label","value","tooltip")
+            LET g.data_col_count = g.data_column.getLength()
+            CALL map_array_to_data(base.TypeInfo.create(data), g.data,  g.data_col_count)
+            CALL gc_column.draw("formonly.wc", g.*)
+
+        ON ACTION example1 ATTRIBUTES(TEXT="Example 1")
+            CALL g.data_column.clear()
+            CALL data.clear()
+            
+            LET g.data_column[1].label = "Element"
+            LET g.data_column[1].type = "string"
+
+            LET g.data_column[2].label = "Density"
+            LET g.data_column[2].type = "number"
+
+            LET g.data_column[3].role = "style"
+            LET g.data_column[3].type = "string"
+
+            LET g.data_column[4].role = "annotation"
+            LET g.data_column[4].type = "string"
+
+            LET data[1].col01 = "Copper"   LET data[1].col02 = 8.84  LET data[1].col03 = "#b87333" LET data[1].col04 = "Cu"
+            LET data[2].col01 = "Silver"   LET data[2].col02 = 10.49 LET data[2].col03 = "silver"  LET data[2].col04 = "Ag"
+            LET data[3].col01 = "Gold"     LET data[3].col02 = 19.30 LET data[3].col03 = "gold"    LET data[3].col04 = "Au"
+            LET data[4].col01 = "Platinum" LET data[4].col02 = 21.45 LET data[4].col03 = "#e5e4e2" LET data[4].col04 = "Pt"
+            LET g.data_col_count = g.data_column.getLength()
+            LET g.data_row_count = data.getLength()
+            
+            LET g.title = "Density of Precious Metals, in g/cm^3"
+            LET g.legend.position = "none"
+            
+            CALL map_array_to_data(base.TypeInfo.create(data), g.data, g.data_col_count)
+            CALL gc_column.draw("formonly.wc", g.*)
+
+        ON ACTION example2 ATTRIBUTES(TEXT="Example 2")
+            CALL g.data_column.clear()
+            CALL data.clear()
+
+            LET g.data_column[1].label = "Year"
+            LET g.data_column[1].type = "string"
+
+            LET g.data_column[2].label = "Visitations"
+            LET g.data_column[2].type = "number"
+
+            LET g.data_column[3].role = "style"
+            LET g.data_column[3].type = "string"
+            
+            LET data[1].col01 = "2010"   LET data[1].col02 = 10  LET data[1].col03 = "color: gray"
+            LET data[2].col01 = "2020"   LET data[2].col02 = 14  LET data[2].col03 = "color: #76A7FA"
+            LET data[3].col01 = "2030"   LET data[3].col02 = 16  LET data[3].col03 = "opacity: 0.2"
+            LET data[4].col01 = "2040"   LET data[4].col02 = 22  LET data[4].col03 = "stroke-color: #703593; stroke-width: 4; fill-color: #C5A5CF"
+            LET data[5].col01 = "2050"   LET data[5].col02 = 28  LET data[5].col03 = "stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2"
+
+            LET g.data_col_count = g.data_column.getLength()
+            LET g.data_row_count = data.getLength()
+            
+            LET g.title = "Styles Extreme Example"
+            LET g.legend.position = "none"
+            
+            CALL map_array_to_data(base.TypeInfo.create(data), g.data, g.data_col_count)
+            CALL gc_column.draw("formonly.wc", g.*)
+
+        ON ACTION example3 ATTRIBUTES(TEXT="Example 3")
+            CALL g.data_column.clear()
+            CALL data.clear()
+
+            LET g.data_column[1].label = "Genre"
+            LET g.data_column[1].type = "string"
+        
+            LET g.data_column[2].label = "Fantasy & Sci Fi"
+            LET g.data_column[2].type = "number"
+    
+            LET g.data_column[3].label = "Romance"
+            LET g.data_column[3].type = "number"
+
+            LET g.data_column[4].label = "Mystery/Crime"
+            LET g.data_column[4].type = "number"
+
+            LET g.data_column[5].label = "General"
+            LET g.data_column[5].type = "number"
+
+            LET g.data_column[6].label = " Western"
+            LET g.data_column[6].type = "number"
+
+            LET g.data_column[7].label = "Literature"
+            LET g.data_column[7].type = "number"
+
+            LET g.data_column[8].role = "style"
+            LET g.data_column[8].type = "string"
+    
+            LET g.data_column[9].role = "tooltip"
+            LET g.data_column[9].type = "string"
+    
+            LET g.data_column[10].role = "annotation"
+            LET g.data_column[10].type = "string"
+
+            LET data[1].col01 = "2010" LET data[1].col02 = 10 LET data[1].col03 = 24 LET data[1].col04 = 20 LET data[1].col05 = 32 LET data[1].col06 = 18 LET data[1].col07 = 5  
+            LET data[2].col01 = "2011" LET data[2].col02 = 16 LET data[2].col03 = 22 LET data[2].col04 = 23 LET data[2].col05 = 30 LET data[2].col06 = 16 LET data[2].col07 = 9  
+            LET data[3].col01 = "2012" LET data[3].col02 = 28 LET data[3].col03 = 19 LET data[3].col04 = 29 LET data[3].col05 = 30 LET data[3].col06 = 12 LET data[3].col07 = 13 
+
+            LET g.data_col_count = g.data_column.getLength()
+            LET g.data_row_count = data.getLength()
+
+            LET g.title = "Stacked Example"
+            LET g.legend.position = "none"
+
+            CALL map_array_to_data(base.TypeInfo.create(data), g.data, g.data_col_count)
             CALL gc_column.draw("formonly.wc", g.*)
             
         ON ACTION close
@@ -135,20 +276,22 @@ END FUNCTION
 
 -- Take a 4gl array and map to data for passing to web component
 -- Note: array is passed in via base.Typeinfo.create(array_name)
-PRIVATE FUNCTION map_array_to_data(n, d, label_column, value_column, tooltip_column)
+PRIVATE FUNCTION map_array_to_data(n, d,  column_count)
 DEFINE n om.DomNode
 DEFINE d DYNAMIC ARRAY WITH DIMENSION 2 OF STRING
-DEFINE label_column, value_column, tooltip_column STRING
+DEFINE column_count INTEGER
 
 DEFINE r om.DomNode
-DEFINE i INTEGER
+DEFINE i,j INTEGER
 
     CALL d.clear()
+    
     FOR i = 1 TO n.getChildCount()
         LET r = n.getChildByIndex(i)
-        LET d[i,1] = get_record_node(r,label_column)
-        LET d[i,2] = get_record_node(r,value_column)
-        LET d[i,3] = get_record_node(r,tooltip_column)
+        FOR j = 1 TO column_count
+            --TODO change this back to parsing columns....
+            LET d[i,j] = get_record_node(r,SFMT("col%1",j USING "&&"))
+        END FOR
     END FOR
 END FUNCTION
 
