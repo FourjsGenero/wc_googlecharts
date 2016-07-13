@@ -37,6 +37,16 @@ Italic     [t06                ]
 END
 END
 
+PAGE (TEXT="Background")
+GRID
+{
+Fill         [bk01      ]
+Stroke       [bk02      ]  
+Stroke-Width [bk03      ]    
+}
+END
+END
+
 END
 GROUP (TEXT="Line")
 GRID
@@ -74,6 +84,10 @@ EDIT r02 = formonly.HEIGHT, NOT NULL;
 #CHECKBOX r03 = formonly.is3d, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
 SPINEDIT r04 = formonly.font_size, VALUEMIN=0;
 EDIT r05 = formonly.font_name;
+
+EDIT bk01 = formonly.background_color_fill;
+EDIT bk02 = formonly.background_color_stroke;
+SPINEDIT bk03 = formonly.background_color_stroke_width, VALUEMIN=0;
 
 WEBCOMPONENT wc01 = formonly.wc, COMPONENTTYPE="gc_line", SIZEPOLICY=FIXED, STRETCH=NONE, TABINDEX=0, HEIGHT=300 PIXELS, WIDTH=300 PIXELS;
 

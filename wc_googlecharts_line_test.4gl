@@ -71,10 +71,10 @@ DEFINE i INTEGER
         INPUT BY NAME g.width, g.height,  g.font_size, g.font_name ATTRIBUTES(WITHOUT DEFAULTS=TRUE) 
         END INPUT
 
-        --INPUT g.background_color.fill, g.background_color.stroke, g.background_color.stroke_width
-        --FROM background_color_fill, background_color_stroke, background_color_stroke_width
-        --ATTRIBUTES (WITHOUT DEFAULTS=TRUE)
-        --END INPUT
+        INPUT g.background_color.fill, g.background_color.stroke, g.background_color.stroke_width
+        FROM background_color_fill, background_color_stroke, background_color_stroke_width
+        ATTRIBUTES (WITHOUT DEFAULTS=TRUE)
+        END INPUT
 
         --INPUT g.chart_area.background_color.stroke, g.chart_area.background_color.stroke_width,
               --g.chart_area.left, g.chart_area.top, g.chart_area.width, g.chart_area.height
