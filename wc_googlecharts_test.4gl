@@ -19,9 +19,8 @@ MAIN
             CALL FGL_WINMESSAGE("Info","Not implemented yet","info")
             #CALL googlecharts_line_test()
 
-        ON ACTION bar ATTRIBUTES(TEXT="Bar")
-            CALL FGL_WINMESSAGE("Info","Not implemented yet","info")
-            #CALL googlecharts_bar_test()
+        ON ACTION column ATTRIBUTES(TEXT="Column")
+            CALL googlecharts_column_test()
 
         ON ACTION close
             EXIT MENU

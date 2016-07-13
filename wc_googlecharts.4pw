@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Project defaultApplication="18736" gstVersion="3001c" version="3.1">
+<Project defaultApplication="18736" gstVersion="3001d" version="3.1">
   <Settings>
     <DynamicProperties version="2">
       <DynamicProperty description="Accent color (Android 5.0 and later)" initialValue="#9575CD" isDefaultInherited="false" isHidden="false" label="Accent color" name="gma-accent-color" readOnly="false" type="COLOR"/>
@@ -55,16 +55,23 @@
   <PlatformList version="1.0"/>
   <Group environment="dirlist:FGLIMAGEPATH=$(ProjectDir)/webcomponents;/Volumes/Daily/github/FourjsGenero/wc_googlecharts/trunk;$(FGLDIR)/lib/image2font.txt;$(FGLIMAGEPATH);." label="wc_googlecharts" language="Genero" targetDirectory="$(ProjectDir)">
     <Application binaryName="wc_googlecharts_test" id="18736" label="wc_googlecharts_test">
+      <VirtualFolder label="column">
+        <File filePath="wc_googlecharts_column_test.4gl"/>
+        <File filePath="wc_googlecharts_column_test.per"/>
+      </VirtualFolder>
       <VirtualFolder label="gauge">
         <File filePath="wc_googlecharts_gauge_test.4gl"/>
         <File filePath="wc_googlecharts_gauge_test.per"/>
       </VirtualFolder>
       <VirtualFolder label="import">
+        <File filePath="gc_column.4gl"/>
+        <File filePath="webcomponents/gc_column/gc_column.html"/>
         <File excludeFromLink="true" filePath="gc_gauge.4gl"/>
         <File filePath="webcomponents/gc_gauge/gc_gauge.html"/>
         <File excludeFromLink="true" filePath="gc_pie.4gl"/>
         <File filePath="webcomponents/gc_pie/gc_pie.html"/>
       </VirtualFolder>
+      <VirtualFolder label="line"/>
       <VirtualFolder label="pie">
         <File filePath="wc_googlecharts_pie_test.4gl"/>
         <File filePath="wc_googlecharts_pie_test.per"/>
