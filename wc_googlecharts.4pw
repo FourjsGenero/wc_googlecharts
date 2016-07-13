@@ -64,14 +64,19 @@
         <File filePath="wc_googlecharts_gauge_test.per"/>
       </VirtualFolder>
       <VirtualFolder label="import">
-        <File filePath="gc_column.4gl"/>
+        <File excludeFromLink="true" filePath="gc_column.4gl"/>
         <File filePath="webcomponents/gc_column/gc_column.html"/>
         <File excludeFromLink="true" filePath="gc_gauge.4gl"/>
         <File filePath="webcomponents/gc_gauge/gc_gauge.html"/>
+        <File excludeFromLink="true" filePath="gc_line.4gl"/>
+        <File filePath="webcomponents/gc_line/gc_line.html"/>
         <File excludeFromLink="true" filePath="gc_pie.4gl"/>
         <File filePath="webcomponents/gc_pie/gc_pie.html"/>
       </VirtualFolder>
-      <VirtualFolder label="line"/>
+      <VirtualFolder label="line">
+        <File filePath="wc_googlecharts_line_test.4gl"/>
+        <File filePath="wc_googlecharts_line_test.per"/>
+      </VirtualFolder>
       <VirtualFolder label="pie">
         <File filePath="wc_googlecharts_pie_test.4gl"/>
         <File filePath="wc_googlecharts_pie_test.per"/>

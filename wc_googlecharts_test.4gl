@@ -16,8 +16,7 @@ MAIN
             CALL googlecharts_pie_test()
 
         ON ACTION line ATTRIBUTES(TEXT="Line")
-            CALL FGL_WINMESSAGE("Info","Not implemented yet","info")
-            #CALL googlecharts_line_test()
+            CALL googlecharts_line_test()
 
         ON ACTION column ATTRIBUTES(TEXT="Column")
             CALL googlecharts_column_test()

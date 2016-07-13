@@ -1,0 +1,64 @@
+LAYOUT (TEXT="GoogleCharts Line Test")
+HBOX
+FOLDER
+
+PAGE (TEXT="Data")
+TABLE
+{
+[d01       |d02       |d03       ]
+[d01       |d02       |d03       ]
+[d01       |d02       |d03       ]
+}
+END
+END
+
+PAGE (TEXT="Rendering")
+GRID
+{
+Width-Height        [r01      |r02      ]
+
+Font Size           [r04                ]
+Font Name           [r05                ]
+
+}
+END
+END
+
+END
+GROUP (TEXT="Line")
+GRID
+{
+[wc01                                                      ]
+[                                                          ]
+[                                                          ]
+[                                                          ]
+[                                                          ]
+[                                                          ]
+[                                                          ]
+[                                                          ]
+[                                                          ]
+[                                                          ]
+}
+END
+END
+
+END
+END
+ATTRIBUTES
+EDIT d01 = formonly.data_label, SCROLL, TITLE="Label";
+EDIT d02 = formonly.data_value, SCROLL, TITLE="Value";
+EDIT d03 = formonly.data_tooltip, SCROLL, TITLE="Tooltip";
+
+EDIT r01 = formonly.WIDTH, NOT NULL;
+EDIT r02 = formonly.HEIGHT, NOT NULL;
+#CHECKBOX r03 = formonly.is3d, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
+SPINEDIT r04 = formonly.font_size, VALUEMIN=0;
+EDIT r05 = formonly.font_name;
+
+WEBCOMPONENT wc01 = formonly.wc, COMPONENTTYPE="gc_line", SIZEPOLICY=FIXED, STRETCH=NONE, TABINDEX=0, HEIGHT=300 PIXELS, WIDTH=300 PIXELS;
+
+
+INSTRUCTIONS
+SCREEN RECORD data_scr(data_label, data_value, data_tooltip)
+
+--3D                  [r03                ]
