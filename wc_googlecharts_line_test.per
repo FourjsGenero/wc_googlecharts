@@ -73,6 +73,18 @@ Italic       [lg08               ]
 END
 END
 
+PAGE(TEXT="Colors")
+TABLE
+{
+[co01                 ]
+[co01                 ]
+[co01                 ]
+[co01                 ]
+[co01                 ]
+}
+END
+END
+
 PAGE(TEXT="Tooltip")
 GRID
 {
@@ -147,6 +159,8 @@ SPINEDIT lg06 = formonly.legend_text_style_font_size, VALUEMIN=0;
 CHECKBOX lg07 = formonly.legend_text_style_bold, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
 CHECKBOX lg08 = formonly.legend_text_style_italic, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
 
+EDIT co01 = formonly.COLOR,NOT NULL, TITLE="Color";
+
 CHECKBOX tt01 = formonly.tooltip_ignore_bounds, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE; 
 CHECKBOX tt02 = formonly.tooltip_is_html, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE; 
 CHECKBOX tt03 = formonly.tooltip_show_color_code, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE; 
@@ -162,6 +176,7 @@ WEBCOMPONENT wc01 = formonly.wc, COMPONENTTYPE="gc_line", SIZEPOLICY=FIXED, STRE
 
 
 INSTRUCTIONS
-SCREEN RECORD data_scr(data_label, data_value, data_tooltip)
+SCREEN RECORD data_scr(data_label, data_value, data_tooltip);
+SCREEN RECORD colors_scr(COLOR);
 
 --3D                  [r03                ]

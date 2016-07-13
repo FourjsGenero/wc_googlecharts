@@ -99,10 +99,10 @@ DEFINE i INTEGER
         ATTRIBUTES (WITHOUT DEFAULTS=TRUE)
         END INPUT
 
-        --INPUT ARRAY g.colors 
-        --FROM colors_scr.*
-        --ATTRIBUTES (WITHOUT DEFAULTS=TRUE)
-        --END INPUT
+        INPUT ARRAY g.colors 
+        FROM colors_scr.*
+        ATTRIBUTES (WITHOUT DEFAULTS=TRUE)
+        END INPUT
         
         -- Web Component
         INPUT BY NAME wc ATTRIBUTES(WITHOUT DEFAULTS=TRUE) 
