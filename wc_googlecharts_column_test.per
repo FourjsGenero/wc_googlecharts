@@ -58,6 +58,22 @@ Width-Height [ca05   |ca06  ]
 END
 END
 
+PAGE (TEXT="Legend")
+GRID
+{
+Position     [lg02               ]
+Alignment    [lg01               ]
+Max Lines    [lg03               ]
+Color        [lg04               ]
+Font Name    [lg05               ]
+Font Size    [lg06               ]
+Bold         [lg07               ]
+Italic       [lg08               ]
+}
+END
+END
+
+
 END
 GROUP (TEXT="Column")
 GRID
@@ -106,6 +122,15 @@ SPINEDIT ca03 = formonly.chart_area_left, VALUEMIN=0;
 SPINEDIT ca04 = formonly.chart_area_top, VALUEMIN=0;
 SPINEDIT ca05 = formonly.chart_area_width, VALUEMIN=0;
 SPINEDIT ca06 = formonly.chart_area_height, VALUEMIN=0;
+
+COMBOBOX lg01 = formonly.legend_alignment, ITEMS=("start","center","end");
+COMBOBOX lg02 = formonly.legend_position, ITEMS=("none", "left", "right", "bottom", "top", "labeled");
+SPINEDIT lg03 = formonly.legend_max_lines, VALUEMIN=0;
+EDIT lg04 = formonly.legend_text_style_color;
+EDIT lg05 = formonly.legend_text_style_font_name;
+SPINEDIT lg06 = formonly.legend_text_style_font_size, VALUEMIN=0;
+CHECKBOX lg07 = formonly.legend_text_style_bold, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
+CHECKBOX lg08 = formonly.legend_text_style_italic, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
 
 WEBCOMPONENT wc01 = formonly.wc, COMPONENTTYPE="gc_column", SIZEPOLICY=FIXED, STRETCH=NONE, TABINDEX=0, HEIGHT=300 PIXELS, WIDTH=300 PIXELS;
 

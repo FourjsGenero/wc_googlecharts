@@ -83,12 +83,12 @@ DEFINE i INTEGER
         ATTRIBUTES (WITHOUT DEFAULTS=TRUE)
         END INPUT
 
-        --INPUT g.legend.alignment, g.legend.position, g.legend.max_lines,
-              --g.legend.text_style.color, g.legend.text_style.font_name, g.legend.text_style.font_size, g.legend.text_style.bold, g.legend.text_style.italic
-        --FROM legend_alignment, legend_position, legend_max_lines,
-             --legend_text_style_color, legend_text_style_font_name, legend_text_style_font_size, legend_text_style_bold, legend_text_style_italic
-        --ATTRIBUTES (WITHOUT DEFAULTS=TRUE)
-        --END INPUT
+        INPUT g.legend.alignment, g.legend.position, g.legend.max_lines,
+              g.legend.text_style.color, g.legend.text_style.font_name, g.legend.text_style.font_size, g.legend.text_style.bold, g.legend.text_style.italic
+        FROM legend_alignment, legend_position, legend_max_lines,
+             legend_text_style_color, legend_text_style_font_name, legend_text_style_font_size, legend_text_style_bold, legend_text_style_italic
+        ATTRIBUTES (WITHOUT DEFAULTS=TRUE)
+        END INPUT
 
         --INPUT g.tooltip.ignore_bounds, g.tooltip.is_html, g.tooltip.show_color_code, g.tooltip.text,
         --g.tooltip.text_style.color, g.tooltip.text_style.font_name, g.tooltip.text_style.font_size, g.tooltip.text_style.bold, g.tooltip.text_style.italic, 
