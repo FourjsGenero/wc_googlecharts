@@ -55,13 +55,23 @@
   <PlatformList version="1.0"/>
   <Group environment="dirlist:FGLIMAGEPATH=$(ProjectDir)/webcomponents;/Volumes/Daily/github/FourjsGenero/wc_googlecharts/trunk;$(FGLDIR)/lib/image2font.txt;$(FGLIMAGEPATH);." label="wc_googlecharts" language="Genero" targetDirectory="$(ProjectDir)">
     <Application binaryName="wc_googlecharts_test" id="18736" label="wc_googlecharts_test">
-      <VirtualFolder label="column">
-        <File filePath="wc_googlecharts_column_test.4gl"/>
-        <File filePath="wc_googlecharts_column_test.per"/>
-      </VirtualFolder>
-      <VirtualFolder label="gauge">
-        <File filePath="wc_googlecharts_gauge_test.4gl"/>
-        <File filePath="wc_googlecharts_gauge_test.per"/>
+      <VirtualFolder label="chart">
+        <VirtualFolder label="column">
+          <File filePath="wc_googlecharts_column_test.4gl"/>
+          <File filePath="wc_googlecharts_column_test.per"/>
+        </VirtualFolder>
+        <VirtualFolder label="gauge">
+          <File filePath="wc_googlecharts_gauge_test.4gl"/>
+          <File filePath="wc_googlecharts_gauge_test.per"/>
+        </VirtualFolder>
+        <VirtualFolder label="line">
+          <File filePath="wc_googlecharts_line_test.4gl"/>
+          <File filePath="wc_googlecharts_line_test.per"/>
+        </VirtualFolder>
+        <VirtualFolder label="pie">
+          <File filePath="wc_googlecharts_pie_test.4gl"/>
+          <File filePath="wc_googlecharts_pie_test.per"/>
+        </VirtualFolder>
       </VirtualFolder>
       <VirtualFolder label="import">
         <File excludeFromLink="true" filePath="gc_column.4gl"/>
@@ -72,19 +82,6 @@
         <File filePath="webcomponents/gc_line/gc_line.html"/>
         <File excludeFromLink="true" filePath="gc_pie.4gl"/>
         <File filePath="webcomponents/gc_pie/gc_pie.html"/>
-      </VirtualFolder>
-      <VirtualFolder label="line">
-        <File filePath="wc_googlecharts_line_test.4gl"/>
-        <File filePath="wc_googlecharts_line_test.per"/>
-      </VirtualFolder>
-      <VirtualFolder label="pie">
-        <File filePath="wc_googlecharts_pie_test.4gl"/>
-        <File filePath="wc_googlecharts_pie_test.per"/>
-      </VirtualFolder>
-      <VirtualFolder label="Ztobedeleted">
-        <File excludeFromCompilation="true" excludeFromLink="true" filePath="fgl__googlecharts_test.4gl"/>
-        <File excludeFromCompilation="true" excludeFromLink="true" filePath="fgl_google_chart.4gl"/>
-        <File excludeFromCompilation="true" excludeFromLink="true" filePath="fgl_googlecharts_test.per"/>
       </VirtualFolder>
       <File filePath="wc_googlecharts_test.4gl"/>
       <File filePath="wc_googlecharts_test.4st"/>
