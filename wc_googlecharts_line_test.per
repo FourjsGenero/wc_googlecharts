@@ -20,6 +20,9 @@ Width-Height        [r01      |r02      ]
 Font Size           [r04                ]
 Font Name           [r05                ]
 
+Orientation         [r07                ]
+Reverse             [r08                ]
+Theme               [r09                ]
 }
 END
 END
@@ -135,9 +138,13 @@ CHECKBOX t06 = formonly.title_text_style_italic, VALUEUNCHECKED=FALSE, VALUECHEC
 
 EDIT r01 = formonly.WIDTH, NOT NULL;
 EDIT r02 = formonly.HEIGHT, NOT NULL;
-#CHECKBOX r03 = formonly.is3d, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
+
 SPINEDIT r04 = formonly.font_size, VALUEMIN=0;
 EDIT r05 = formonly.font_name;
+
+COMBOBOX r07 = formonly.orientation, ITEMS=("horizontal","vertical");
+CHECKBOX r08 = formonly.reverse_categories, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
+COMBOBOX r09 = formonly.theme, ITEMS=("maximized");
 
 EDIT bk01 = formonly.background_color_fill;
 EDIT bk02 = formonly.background_color_stroke;

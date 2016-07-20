@@ -87,7 +87,7 @@ DEFINE i INTEGER
         ATTRIBUTES(WITHOUT DEFAULTS=TRUE)
         END INPUT
 
-        INPUT BY NAME g.width, g.height,  g.font_size, g.font_name ATTRIBUTES(WITHOUT DEFAULTS=TRUE) 
+        INPUT BY NAME g.width, g.height,  g.font_size, g.font_name, g.orientation, g.reverse_categories, g.theme ATTRIBUTES(WITHOUT DEFAULTS=TRUE) 
         END INPUT
 
         INPUT g.background_color.fill, g.background_color.stroke, g.background_color.stroke_width
