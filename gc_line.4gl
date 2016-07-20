@@ -51,6 +51,7 @@ PUBLIC TYPE line_rec RECORD
     --enableInteractivity BOOLEAN,
     -- explorer 
     --focus_target BOOLEAN
+    curve_type STRING,
     font_size INTEGER,
     font_name STRING,
     --forceIFrame BOOLEAN,
@@ -132,6 +133,8 @@ PUBLIC TYPE line_rec RECORD
             italic BOOLEAN
         END RECORD
     END RECORD,
+    line_dash_style DYNAMIC ARRAY OF INTEGER,
+    line_width INTEGER,
     orientation STRING,
     reverse_categories BOOLEAN,
     -- series

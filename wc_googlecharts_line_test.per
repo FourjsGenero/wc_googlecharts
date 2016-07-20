@@ -85,6 +85,24 @@ Italic       [lg08               ]
 END
 END
 
+PAGE(TEXT="Line")
+VBOX
+GRID
+{
+Curve Type          [li01               ]
+Line Width          [li03               ]
+}
+END
+GROUP (TEXT="Line Dash Style")
+TABLE
+{
+[li02             ]
+}
+END
+END
+END
+END
+
 PAGE(TEXT="Colors")
 TABLE
 {
@@ -166,6 +184,7 @@ COMBOBOX r07 = formonly.orientation, ITEMS=("horizontal","vertical");
 CHECKBOX r08 = formonly.reverse_categories, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
 COMBOBOX r09 = formonly.theme, ITEMS=("maximized");
 
+
 EDIT bk01 = formonly.background_color_fill;
 EDIT bk02 = formonly.background_color_stroke;
 SPINEDIT bk03 = formonly.background_color_stroke_width, VALUEMIN=0;
@@ -186,6 +205,10 @@ SPINEDIT lg06 = formonly.legend_text_style_font_size, VALUEMIN=0;
 CHECKBOX lg07 = formonly.legend_text_style_bold, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
 CHECKBOX lg08 = formonly.legend_text_style_italic, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
 
+COMBOBOX li01 = formonly.curve_type, ITEMS=("function");
+SPINEDIT li02 = formonly.line_dash_style, VALUEMIN = 0;
+SPINEDIT li03 = formonly.line_width, VALUEMIN = 0;
+
 EDIT co01 = formonly.COLOR,NOT NULL, TITLE="Color";
 
 CHECKBOX tt01 = formonly.tooltip_ignore_bounds, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE; 
@@ -205,6 +228,7 @@ WEBCOMPONENT wc01 = formonly.wc, COMPONENTTYPE="gc_line", SIZEPOLICY=FIXED, STRE
 INSTRUCTIONS
 SCREEN RECORD data_column_scr(datatype, LABEL, role);
 SCREEN RECORD data_scr(col01, col02, col03, col04, col05, col06, col07, col08, col09, col10);
+SCREEN RECORD line_dash_style_scr(line_dash_style);
 SCREEN RECORD colors_scr(COLOR);
 
 --3D                  [r03                ]

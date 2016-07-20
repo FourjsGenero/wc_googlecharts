@@ -16,7 +16,6 @@ DEFINE data DYNAMIC ARRAY OF RECORD
     col09 STRING,
     col10 STRING
 END RECORD
-DEFINE i INTEGER
 
     INITIALIZE g.* TO NULL
 
@@ -48,6 +47,9 @@ DEFINE i INTEGER
     LET g.colors[18] = "#329262"
     LET g.colors[19] = "#5574A6"
     LET g.colors[20] = "#3B3EAC"
+
+    LET g.line_dash_style[1] = 1
+    LET g.line_dash_style[2] = 0
 
     -- Other settings can be set programmatically similar to ...
     --LET g.title_text_style.color = "blue"
@@ -116,6 +118,14 @@ DEFINE i INTEGER
         FROM tooltip_ignore_bounds, tooltip_is_html, tooltip_show_color_code, {tooltip_text,}
         tooltip_text_style_color, tooltip_text_style_font_name, tooltip_text_style_font_size, tooltip_text_style_bold, tooltip_text_style_italic, 
         tooltip_trigger
+        ATTRIBUTES (WITHOUT DEFAULTS=TRUE)
+        END INPUT
+
+        INPUT BY NAME g.curve_type, g.line_width ATTRIBUTES(WITHOUT DEFAULTS=TRUE) 
+        END INPUT
+
+        INPUT ARRAY g.line_dash_style
+        FROM line_dash_style_scr.*
         ATTRIBUTES (WITHOUT DEFAULTS=TRUE)
         END INPUT
 
@@ -202,7 +212,7 @@ DEFINE i INTEGER
             LET g.data_col_count = g.data_column.getLength()
             LET g.data_row_count = data.getLength()
             
-            LET g.title = "Box Iffce Earnings in First Two Weeks of Opening"
+            LET g.title = "Box Office Earnings in First Two Weeks of Opening"
             
             CALL map_array_to_data(base.TypeInfo.create(data), g.data, "col01,col02,col03,col04")
             
