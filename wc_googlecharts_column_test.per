@@ -29,6 +29,11 @@ Width-Height        [r01      |r02      ]
 Font Size           [r04                ]
 Font Name           [r05                ]
 
+Stacked             [r06                ]
+Orientation         [r07                ]
+Reverse             [r08                ]
+Theme               [r09                ]
+
 }
 END
 END
@@ -156,9 +161,12 @@ CHECKBOX t06 = formonly.title_text_style_italic, VALUEUNCHECKED=FALSE, VALUECHEC
 
 EDIT r01 = formonly.WIDTH, NOT NULL;
 EDIT r02 = formonly.HEIGHT, NOT NULL;
-#CHECKBOX r03 = formonly.is3d, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
 SPINEDIT r04 = formonly.font_size, VALUEMIN=0;
 EDIT r05 = formonly.font_name;
+COMBOBOX r06 = formonly.is_stacked, ITEMS=("false","true","percent","relative","absolute");
+COMBOBOX r07 = formonly.orientation, ITEMS=("horizontal","vertical");
+CHECKBOX r08 = formonly.reverse_categories, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
+COMBOBOX r09 = formonly.theme, ITEMS=("maximized");
 
 EDIT bk01 = formonly.background_color_fill;
 EDIT bk02 = formonly.background_color_stroke;
@@ -201,5 +209,3 @@ INSTRUCTIONS
 SCREEN RECORD data_column_scr(datatype, LABEL, role);
 SCREEN RECORD data_scr(col01, col02, col03, col04, col05, col06, col07, col08, col09, col10);
 SCREEN RECORD colors_scr(COLOR);
-
---3D                  [r03                ]
