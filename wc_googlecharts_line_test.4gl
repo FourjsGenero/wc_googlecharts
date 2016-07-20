@@ -5,36 +5,28 @@ FUNCTION googlecharts_line_test()
 DEFINE g gc_line.line_rec
 DEFINE wc STRING
 DEFINE data DYNAMIC ARRAY OF RECORD
-    label STRING,
-    value STRING,
-    tooltip STRING
+    col01 STRING,
+    col02 STRING,
+    col03 STRING,
+    col04 STRING,
+    col05 STRING,
+    col06 STRING,
+    col07 STRING,
+    col08 STRING,
+    col09 STRING,
+    col10 STRING
 END RECORD
 DEFINE i INTEGER
 
     INITIALIZE g.* TO NULL
 
-    -- Set the data
-    LET g.data_col_count = 3
-    LET g.data_row_count = 4
-    LET g.data_column[1].label = "Area"
-    LET g.data_column[1].type = "string"
-    LET g.data_column[2].label = "Sales"
-    LET g.data_column[2].type = "number"
-    LET g.data_column[3].role = "tooltip"
-    LET g.data_column[3].type = "string"
-
-    LET data[1].label = "North"      LET data[1].value = 1000
-    LET data[2].label = "East"       LET data[2].value = 2000
-    LET data[3].label = "South"      LET data[3].value = 3000
-    LET data[4].label = "West"       LET data[4].value = 4000
-
-    -- Set some minumum settings for the pie chart
+    -- Set some minumum settings for the line chart
     LET g.chart_area.left = 50
     LET g.chart_area.top = 50
     LET g.chart_area.height = 200
     LET g.chart_area.width = 200
     LET g.height = 275
-    LET g.title = "Example Column Chart"
+    LET g.title = "Example Line Chart"
     LET g.width = 275
     LET g.colors[1] = "#3366CC"
     LET g.colors[2] = "#DC3912"
@@ -79,6 +71,15 @@ DEFINE i INTEGER
     OPEN WINDOW line_test WITH FORM "wc_googlecharts_line_test"
     
     DIALOG ATTRIBUTES(UNBUFFERED)
+        INPUT ARRAY g.data_column FROM data_column_scr.* ATTRIBUTES(WITHOUT DEFAULTS=TRUE)
+            ON CHANGE label
+                CALL set_column_headings_from_column_data(g.data_column)
+            ON CHANGE role
+                CALL set_column_headings_from_column_data(g.data_column)
+            ON ROW CHANGE
+                CALL set_column_headings_from_column_data(g.data_column)
+        END INPUT
+    
         INPUT ARRAY data FROM data_scr.* ATTRIBUTES(WITHOUT DEFAULTS=TRUE)
         END INPUT
 
@@ -129,16 +130,42 @@ DEFINE i INTEGER
 
         ON ACTION draw ATTRIBUTES(TEXT="Draw")
             LABEL lbl_draw:
-            CALL map_array_to_data(base.TypeInfo.create(data), g.data, "label","value","tooltip")
+            LET g.data_col_count = g.data_column.getLength()
+            CALL map_array_to_data(base.TypeInfo.create(data), g.data, columnlist_string(g.data_col_count))
+            
             LET g.data_row_count = data.getLength()
             CALL gc_line.draw("formonly.wc", g.*)
 
-        ON ACTION random ATTRIBUTES(TEXT="Random")
-            -- randomise data
-            FOR i = 1 TO data.getLength()
-                LET data[i].value = util.Math.rand(10000)+1
-            END FOR
-            CALL map_array_to_data(base.TypeInfo.create(data), g.data, "label","value","tooltip")
+        ON ACTION example1 ATTRIBUTES(TEXT="Example 1")
+            LET data[1].col01 = "Year" 
+
+            CALL g.data_column.clear()
+            CALL data.clear()
+
+            LET g.data_column[1].label = "Year"
+            LET g.data_column[1].type = "string"
+
+            LET g.data_column[2].label = "Sales"
+            LET g.data_column[2].type = "number"
+
+            LET g.data_column[3].label = "Expenses"
+            LET g.data_column[3].type = "number"
+            
+            CALL set_column_headings_from_column_data(g.data_column)
+
+            LET data[1].col01 = "2004"   LET data[1].col02 = 1000  LET data[1].col03 = "400" 
+            LET data[2].col01 = "2005"   LET data[2].col02 = 1170  LET data[2].col03 = "460" 
+            LET data[3].col01 = "2006"   LET data[3].col02 = 660   LET data[3].col03 = "1120" 
+            LET data[4].col01 = "2007"   LET data[4].col02 = 1030  LET data[4].col03 = "540"
+            
+            LET g.data_col_count = g.data_column.getLength()
+            LET g.data_row_count = data.getLength()
+            
+            LET g.title = "Company Performance"
+            LET g.legend.position = "bottom"
+            
+            CALL map_array_to_data(base.TypeInfo.create(data), g.data, "col01,col02,col03")
+            
             CALL gc_line.draw("formonly.wc", g.*)
             
         ON ACTION close
@@ -154,26 +181,26 @@ END FUNCTION
 
 -- Take a 4gl array and map to data for passing to web component
 -- Note: array is passed in via base.Typeinfo.create(array_name)
-PRIVATE FUNCTION map_array_to_data(n, d, label_column, value_column, tooltip_column)
+PRIVATE FUNCTION map_array_to_data(n, d,  column_list)
 DEFINE n om.DomNode
 DEFINE d DYNAMIC ARRAY WITH DIMENSION 2 OF STRING
-DEFINE label_column, value_column, tooltip_column STRING
+DEFINE column_list STRING
 
 DEFINE r om.DomNode
-DEFINE i INTEGER
+DEFINE i,j INTEGER
+DEFINE tok base.StringTokenizer
 
     CALL d.clear()
     FOR i = 1 TO n.getChildCount()
         LET r = n.getChildByIndex(i)
-        LET d[i,1] = get_record_node(r,label_column)
-        LET d[i,2] = get_record_node(r,value_column)
-        LET d[i,3] = get_record_node(r,tooltip_column)
+        LET j = 0
+        LET tok = base.StringTokenizer.create(column_list,",")
+        WHILE tok.hasMoreTokens()
+            LET j = j + 1
+            LET d[i,j] = get_record_node(r,tok.nextToken())
+        END WHILE
     END FOR
 END FUNCTION
-
-
-
-
 
 
 
@@ -190,4 +217,45 @@ DEFINE c STRING
         LET f = nl.item(1)
         RETURN f.getAttribute("value")
     END IF
+END FUNCTION
+
+
+
+PRIVATE FUNCTION columnlist_string(x)
+DEFINE x INTEGER
+DEFINE sb base.StringBuffer
+DEFINE i iNTEGER
+
+    LET sb = base.StringBuffer.create()
+    FOR i = 1 TO x
+        IF i > 1 THEN
+            CALL sb.append(",")
+        END IF
+        CALL sb.append(SFMT("col%1", i USING "&&"))
+    END FOR
+    RETURN sb.toString()
+END FUNCTION
+
+
+
+PRIVATE FUNCTION set_column_headings_from_column_data(l_data_column)
+DEFINE l_data_column DYNAMIC ARRAY OF RECORD
+    type STRING,
+    label STRING,
+    role STRING
+END RECORD
+
+DEFINE w ui.Window
+DEFINE f ui.Form
+DEFINE i INTEGER
+
+    LET w= ui.Window.getCurrent()
+    LET f = w.getForm()
+
+    FOR i = 1 TO l_data_column.getLength() 
+        CALL f.setElementText(SFMT("formonly.col%1", i USING "&&"), nvl(l_data_column[i].label,l_data_column[i].role))
+    END FOR
+    FOR i = (l_data_column.getLength()+1) TO 10
+        CALL f.setElementText(SFMT("formonly.col%1", i USING "&&"), "")
+    END FOR
 END FUNCTION
