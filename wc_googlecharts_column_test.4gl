@@ -140,7 +140,7 @@ DEFINE i INTEGER
         ON ACTION draw ATTRIBUTES(TEXT="Draw")
             LABEL lbl_draw:
             LET g.data_col_count = g.data_column.getLength()
-            CALL map_array_to_data(base.TypeInfo.create(data), g.data, g.data_col_count)
+            CALL map_array_to_data(base.TypeInfo.create(data), g.data, columnlist_string(g.data_col_count))
             
             LET g.data_row_count = data.getLength()
             CALL gc_column.draw("formonly.wc", g.*)
@@ -165,13 +165,14 @@ DEFINE i INTEGER
             LET data[2].col01 = "Silver"   LET data[2].col02 = 10.49 LET data[2].col03 = "silver"  LET data[2].col04 = "Ag"
             LET data[3].col01 = "Gold"     LET data[3].col02 = 19.30 LET data[3].col03 = "gold"    LET data[3].col04 = "Au"
             LET data[4].col01 = "Platinum" LET data[4].col02 = 21.45 LET data[4].col03 = "#e5e4e2" LET data[4].col04 = "Pt"
+            
             LET g.data_col_count = g.data_column.getLength()
             LET g.data_row_count = data.getLength()
             
             LET g.title = "Density of Precious Metals, in g/cm^3"
             LET g.legend.position = "none"
             
-            CALL map_array_to_data(base.TypeInfo.create(data), g.data, g.data_col_count)
+            CALL map_array_to_data(base.TypeInfo.create(data), g.data, "col01,col02,col03,col04")
             CALL gc_column.draw("formonly.wc", g.*)
 
         ON ACTION example2 ATTRIBUTES(TEXT="Example 2")
@@ -199,7 +200,7 @@ DEFINE i INTEGER
             LET g.title = "Styles Extreme Example"
             LET g.legend.position = "none"
             
-            CALL map_array_to_data(base.TypeInfo.create(data), g.data, g.data_col_count)
+            CALL map_array_to_data(base.TypeInfo.create(data), g.data, "col01,col02,col03")
             CALL gc_column.draw("formonly.wc", g.*)
 
         ON ACTION example3 ATTRIBUTES(TEXT="Example 3")
@@ -237,7 +238,7 @@ DEFINE i INTEGER
             LET g.title = "Stacked Example"
             LET g.legend.position = "none"
 
-            CALL map_array_to_data(base.TypeInfo.create(data), g.data, g.data_col_count)
+            CALL map_array_to_data(base.TypeInfo.create(data), g.data, "col01,col02,col03,col04,col05,col06,col07")
             CALL gc_column.draw("formonly.wc", g.*)
             
         ON ACTION close
@@ -253,28 +254,26 @@ END FUNCTION
 
 -- Take a 4gl array and map to data for passing to web component
 -- Note: array is passed in via base.Typeinfo.create(array_name)
-PRIVATE FUNCTION map_array_to_data(n, d,  column_count)
+PRIVATE FUNCTION map_array_to_data(n, d,  column_list)
 DEFINE n om.DomNode
 DEFINE d DYNAMIC ARRAY WITH DIMENSION 2 OF STRING
-DEFINE column_count INTEGER
+DEFINE column_list STRING
 
 DEFINE r om.DomNode
 DEFINE i,j INTEGER
+DEFINE tok base.StringTokenizer
 
     CALL d.clear()
-    
     FOR i = 1 TO n.getChildCount()
         LET r = n.getChildByIndex(i)
-        FOR j = 1 TO column_count
-            --TODO change this back to parsing columns....
-            LET d[i,j] = get_record_node(r,SFMT("col%1",j USING "&&"))
-        END FOR
+        LET j = 0
+        LET tok = base.StringTokenizer.create(column_list,",")
+        WHILE tok.hasMoreTokens()
+            LET j = j + 1
+            LET d[i,j] = get_record_node(r,tok.nextToken())
+        END WHILE
     END FOR
 END FUNCTION
-
-
-
-
 
 
 
@@ -291,4 +290,21 @@ DEFINE c STRING
         LET f = nl.item(1)
         RETURN f.getAttribute("value")
     END IF
+END FUNCTION
+
+
+
+PRIVATE FUNCTION columnlist_string(x)
+DEFINE x INTEGER
+DEFINE sb base.StringBuffer
+DEFINE i iNTEGER
+
+    LET sb = base.StringBuffer.create()
+    FOR i = 1 TO x
+        IF i > 1 THEN
+            CALL sb.append(",")
+        END IF
+        CALL sb.append(SFMT("col%1", i USING "&&"))
+    END FOR
+    RETURN sb.toString()
 END FUNCTION
