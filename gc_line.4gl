@@ -19,14 +19,14 @@ PUBLIC TYPE line_rec RECORD
 
     data DYNAMIC ARRAY WITH DIMENSION 2 OF STRING,
 
-    animation RECORD
-        duration INTEGER,
-        easing STRING, 
-        startup BOOLEAN
-    END RECORD,
+    --animation RECORD
+        --duration INTEGER,
+        --easing STRING, 
+        --startup BOOLEAN
+    --END RECORD,
     -- annotations RECORD
     --  END RECORD,
-    axisTitlesPosition STRING,
+    --axisTitlesPosition STRING,
 
     background_color RECORD
         stroke_width INTEGER,
@@ -34,10 +34,6 @@ PUBLIC TYPE line_rec RECORD
         fill STRING
     END RECORD,
 
-    bar RECORD
-        group_width INTEGER
-    END RECORD,
-    bars STRING,
     chart_area RECORD
         background_color RECORD
             stroke STRING,
@@ -51,80 +47,79 @@ PUBLIC TYPE line_rec RECORD
         title STRING
     END RECORD,
     colors DYNAMIC ARRAY OF STRING,
-    data_opacity FLOAT,
-    enableInteractivity BOOLEAN,
+    --data_opacity FLOAT,
+    --enableInteractivity BOOLEAN,
     -- explorer 
     --focus_target BOOLEAN
     font_size INTEGER,
     font_name STRING,
-    forceIFrame BOOLEAN,
-    h_axis RECORD
-        baseline FLOAT,
-        baseline_color STRING,
-        direction INTEGER,
-        format STRING,
-        gridlines RECORD
-            color STRING,
-            count INTEGER,
-            units RECORD
-                years STRING,
-                months STRING,
-                days STRING,
-                hours STRING,
-                minutes STRING,
-                seconds STRING,
-                milliseconds STRING
-            END RECORD
-        END RECORD,
-        minor_gridlines RECORD
-            color STRING,
-            count INTEGER,
-            units RECORD
-                years STRING,
-                months STRING,
-                days STRING,
-                hours STRING,
-                minutes STRING,
-                seconds STRING,
-                milliseconds STRING
-            END RECORD
-        END RECORD,
-        log_scale BOOLEAN,
-        scale_type STRING,
-        text_position STRING,
-        text_style RECORD
-            color STRING,
-            font_name STRING,
-            font_size INTEGER,
-            bold BOOLEAN,
-            italic BOOLEAN
-        END RECORD,
-        ticks STRING,
-        title STRING,
-        title_text_style RECORD
-            color STRING,
-            font_name STRING,
-            font_size INTEGER,
-            bold BOOLEAN,
-            italic BOOLEAN
-        END RECORD,
-        allow_container_boundary_text_cutoff BOOLEAN,
-        slanted_text BOOLEAN,
-        slanted_text_angle FLOAT,
-        max_alternation INTEGER,
-        max_text_lines INTEGER,
-        min_text_spacing INTEGER,
-        show_text_every INTEGER,
-        max_value FLOAT,
-        min_value FLOAT,
-        view_window_mode STRING,
-        view_window RECORD
-            max FLOAT,
-            min FLOAT
-        END RECORD
-    END RECORD,
+    --forceIFrame BOOLEAN,
+    --h_axis RECORD
+        --baseline FLOAT,
+        --baseline_color STRING,
+        --direction INTEGER,
+        --format STRING,
+        --gridlines RECORD
+            --color STRING,
+            --count INTEGER,
+            --units RECORD
+                --years STRING,
+                --months STRING,
+                --days STRING,
+                --hours STRING,
+                --minutes STRING,
+                --seconds STRING,
+                --milliseconds STRING
+            --END RECORD
+        --END RECORD,
+        --minor_gridlines RECORD
+            --color STRING,
+            --count INTEGER,
+            --units RECORD
+                --years STRING,
+                --months STRING,
+                --days STRING,
+                --hours STRING,
+                --minutes STRING,
+                --seconds STRING,
+                --milliseconds STRING
+            --END RECORD
+        --END RECORD,
+        --log_scale BOOLEAN,
+        --scale_type STRING,
+        --text_position STRING,
+        --text_style RECORD
+            --color STRING,
+            --font_name STRING,
+            --font_size INTEGER,
+            --bold BOOLEAN,
+            --italic BOOLEAN
+        --END RECORD,
+        --ticks STRING,
+        --title STRING,
+        --title_text_style RECORD
+            --color STRING,
+            --font_name STRING,
+            --font_size INTEGER,
+            --bold BOOLEAN,
+            --italic BOOLEAN
+        --END RECORD,
+        --allow_container_boundary_text_cutoff BOOLEAN,
+        --slanted_text BOOLEAN,
+        --slanted_text_angle FLOAT,
+        --max_alternation INTEGER,
+        --max_text_lines INTEGER,
+        --min_text_spacing INTEGER,
+        --show_text_every INTEGER,
+        --max_value FLOAT,
+        --min_value FLOAT,
+        --view_window_mode STRING,
+        --view_window RECORD
+            --max FLOAT,
+            --min FLOAT
+        --END RECORD
+    --END RECORD,
     height INTEGER,
-    is_stacked STRING,
     legend RECORD
         alignment STRING,
         position STRING,
