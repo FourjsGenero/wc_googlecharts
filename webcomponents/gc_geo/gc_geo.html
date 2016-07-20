@@ -1,0 +1,70 @@
+<html>  
+    <head>    
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>   
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+        <script type="text/javascript">
+            google.charts.load('current', {'packages':['geochart']});
+            google.charts.setOnLoadCallback(drawChart);
+
+   function drawChart() {        
+   }    
+     
+   onICHostReady = function(version) {
+      var myProps;
+
+      if ( version != 1.0 ) {
+         alert('Invalid API version');
+         return;
+      }
+
+      draw_geo = function(p) {   
+   
+         properties = eval('(' + p + ')');
+        
+         var data = new google.visualization.DataTable();
+
+         var colLength = parseInt(properties.data_col_count);
+         var rowLength = parseInt(properties.data_row_count);
+
+         for (var k=0; k < colLength; k++) {
+            if (properties.data_column[k].label) {
+                data.addColumn(properties.data_column[k].type, properties.data_column[k].label);
+            }
+            else
+            {
+                var r = {};
+                r["type"] = properties.data_column[k].type;
+                r["role"] = properties.data_column[k].role;
+                data.addColumn(r);
+            }
+         }
+
+         data.addRows(rowLength);
+
+         for (var i=0; i < rowLength; i++) {
+            for (var j=0; j < colLength; j++) {
+                data.setValue(i,j, properties.data[i][j]);
+            }
+         }
+
+         var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));   
+         
+         var options  = {
+                          height: properties.height,
+                          region: properties.region,
+                          width: properties.width
+         };
+
+         chart.draw(data, options); 
+    }
+
+   }
+
+
+   </script>
+   </head>  
+   <body>  
+      <div id='chart_div'></div>  
+   </body>
+</html>

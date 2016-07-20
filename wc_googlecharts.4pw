@@ -64,6 +64,10 @@
           <File filePath="wc_googlecharts_gauge_test.4gl"/>
           <File filePath="wc_googlecharts_gauge_test.per"/>
         </VirtualFolder>
+        <VirtualFolder label="geo">
+          <File filePath="wc_googlecharts_geo_test.4gl"/>
+          <File filePath="wc_googlecharts_geo_test.per"/>
+        </VirtualFolder>
         <VirtualFolder label="line">
           <File filePath="wc_googlecharts_line_test.4gl"/>
           <File filePath="wc_googlecharts_line_test.per"/>
@@ -78,6 +82,8 @@
         <File filePath="webcomponents/gc_column/gc_column.html"/>
         <File excludeFromLink="true" filePath="gc_gauge.4gl"/>
         <File filePath="webcomponents/gc_gauge/gc_gauge.html"/>
+        <File excludeFromLink="true" filePath="gc_geo.4gl"/>
+        <File filePath="webcomponents/gc_geo/gc_geo.html"/>
         <File excludeFromLink="true" filePath="gc_line.4gl"/>
         <File filePath="webcomponents/gc_line/gc_line.html"/>
         <File excludeFromLink="true" filePath="gc_pie.4gl"/>

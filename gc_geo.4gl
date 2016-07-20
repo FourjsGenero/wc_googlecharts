@@ -1,0 +1,28 @@
+IMPORT util
+
+PUBLIC TYPE geo_rec RECORD
+    data_col_count INTEGER,
+    data_row_count INTEGER,
+    data_column DYNAMIC ARRAY OF RECORD
+        type STRING,
+        label STRING,
+        role STRING
+    END RECORD,
+
+    data DYNAMIC ARRAY WITH DIMENSION 2 OF STRING,
+
+    height INTEGER,
+    region STRING, 
+    width INTEGER
+END RECORD
+
+FUNCTION draw(fieldname, c)
+DEFINE fieldname STRING
+DEFINE c geo_rec
+
+DEFINE s STRING
+DEFINE result STRING
+
+    LET s = util.JSON.stringify(c)
+    CALL ui.Interface.frontCall("webcomponent","call",[fieldname,"draw_geo",s],[result])
+END FUNCTION
