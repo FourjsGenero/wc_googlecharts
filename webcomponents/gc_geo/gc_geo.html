@@ -51,6 +51,13 @@
          var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));   
          
          var options  = {
+                          colorAxis: {
+                            minValue: properties.color_axis.min_value,
+                            maxValue: properties.color_axis.max_value,
+                            values: properties.color_axis.values,
+                            colors: properties.color_axis.colors
+                          },
+                          displayMode: properties.display_mode,
                           height: properties.height,
                           region: properties.region,
                           width: properties.width

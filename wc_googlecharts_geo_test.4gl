@@ -58,7 +58,20 @@ END RECORD
         INPUT ARRAY data FROM data_scr.* ATTRIBUTES(WITHOUT DEFAULTS=TRUE)
         END INPUT
 
-        INPUT BY NAME g.width, g.height ATTRIBUTES(WITHOUT DEFAULTS=TRUE) 
+        INPUT BY NAME g.width, g.height, g.region, g.display_mode ATTRIBUTES(WITHOUT DEFAULTS=TRUE) 
+        END INPUT
+
+        INPUT g.color_axis.min_value, g.color_axis.max_value FROM color_axis_min_value, color_axis_max_value ATTRIBUTES(WITHOUT DEFAULTS=TRUE) 
+        END INPUT
+
+        INPUT ARRAY g.color_axis.values 
+        FROM color_axis_values_scr.*
+        ATTRIBUTES (WITHOUT DEFAULTS=TRUE)
+        END INPUT
+
+        INPUT ARRAY g.color_axis.colors 
+        FROM color_axis_colors_scr.*
+        ATTRIBUTES (WITHOUT DEFAULTS=TRUE)
         END INPUT
 
         -- Web Component
@@ -94,12 +107,54 @@ END RECORD
             
             LET g.data_col_count = g.data_column.getLength()
             LET g.data_row_count = data.getLength()
+
+            INITIALIZE g.region TO NULL
+            INITIALIZE g.display_mode TO NULL
+            CALL g.color_axis.colors.clear()
             
             CALL map_array_to_data(base.TypeInfo.create(data), g.data, "col01,col02")
             
             CALL gc_geo.draw("formonly.wc", g.*)
 
-       
+        ON ACTION example2 ATTRIBUTES(TEXT="Example 2")
+            CALL g.data_column.clear()
+            CALL data.clear()
+            
+            LET g.data_column[1].label = "Country"
+            LET g.data_column[1].type = "string"
+
+            LET g.data_column[2].label = "Population"
+            LET g.data_column[2].type = "number"
+
+            LET g.data_column[3].label = "Area"
+            LET g.data_column[3].type = "number"
+
+            CALL set_column_headings_from_column_data(g.data_column)
+
+            LET data[1].col01 = 'Rome'      LET data[1].col02 =  2761477   LET data[1].col03 =   1285.31
+            LET data[2].col01 = 'Milan'     LET data[2].col02 =  1324110   LET data[2].col03 =    181.76
+            LET data[3].col01 = 'Naples'    LET data[3].col02 =   959574   LET data[3].col03 =    117.27
+            LET data[4].col01 = 'Turin'     LET data[4].col02 =   907563   LET data[4].col03 =    130.17
+            LET data[5].col01 = 'Palermo'   LET data[5].col02 =   655875   LET data[5].col03 =    158.9
+            LET data[6].col01 = 'Genoa'     LET data[6].col02 =   607906   LET data[6].col03 =    243.60
+            LET data[7].col01 = 'Bologna'   LET data[7].col02 =   380181   LET data[7].col03 =    140.7
+            LET data[8].col01 = 'Florence'  LET data[8].col02 =   371282   LET data[8].col03 =    102.41
+            LET data[9].col01 = 'Fiumicino' LET data[9].col02 =    67370   LET data[9].col03 =    213.44
+            LET data[10].col01 = 'Anzio'    LET data[10].col02 =   52192   LET data[10].col03 =    43.43
+            LET data[11].col01 = 'Ciampino' LET data[11].col02 =   38262   LET data[11].col03 =    11
+            
+            LET g.data_col_count = g.data_column.getLength()
+            LET g.data_row_count = data.getLength()
+
+            LET g.region = "IT"
+            LET g.display_mode = "markers"
+
+            LET g.color_axis.colors[1] = "green"
+            LET g.color_axis.colors[2] = "blue"
+            
+            CALL map_array_to_data(base.TypeInfo.create(data), g.data, "col01,col02,col03")
+            
+            CALL gc_geo.draw("formonly.wc", g.*)
             
         ON ACTION close
             EXIT DIALOG

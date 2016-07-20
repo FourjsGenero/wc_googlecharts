@@ -11,6 +11,13 @@ PUBLIC TYPE geo_rec RECORD
 
     data DYNAMIC ARRAY WITH DIMENSION 2 OF STRING,
 
+    color_axis RECORD
+        min_value FLOAT,
+        max_value FLOAT,
+        values DYNAMIC ARRAY OF STRING,
+        colors DYNAMIC ARRAY OF STRING
+    END RECORD,
+    display_mode STRING,
     height INTEGER,
     region STRING, 
     width INTEGER

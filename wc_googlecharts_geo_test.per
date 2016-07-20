@@ -25,10 +25,34 @@ PAGE (TEXT="Rendering")
 GRID
 {
 Width-Height        [r01      |r02      ]
+Region              [r03                ]
+Display Mode        [r04                ]
 }
 END
 END
+PAGE (TEXT="Colors")
+VBOX
+GRID
+{
+Min Value         [c01                ]
+Max Value         [c02                ]
+}
 END
+HBOX
+TABLE
+{
+[c03             ]
+}
+END
+TABLE
+{
+[c04             ]
+}
+END #TABLE
+END #HBOX
+END #VBOX
+END #PAGE
+END #FOLDER
 
 GROUP (TEXT="Geo")
 GRID
@@ -54,7 +78,7 @@ ATTRIBUTES
 
 EDIT dc01 = formonly.datatype, TITLE="Datatype", SCROLL;
 EDIT dc02 = formonly.LABEL, TITLE="Label", SCROLL;
-EDIT dc03 = formonly.role, TITLE="Role", SCROLL;
+EDIT dc03 = formonly.role, TITLE="", SCROLL;
 
 EDIT d01 = formonly.col01, SCROLL;
 EDIT d02 = formonly.col02, SCROLL;
@@ -70,9 +94,21 @@ EDIT d10 = formonly.col10, SCROLL;
 EDIT r01 = formonly.WIDTH, NOT NULL;
 EDIT r02 = formonly.HEIGHT, NOT NULL;
 
+COMBOBOX r03 = formonly.display_mode, ITEMS=("auto","regions","markers","text");
+EDIT r04 = formonly.region;
+
+EDIT c01 = formonly.color_axis_min_value;
+EDIT c02 = formonly.color_axis_max_value;
+
+EDIT c03 = formonly.color_axis_value;
+EDIT c04 = formonly.color_axis_color;
+
 WEBCOMPONENT wc01 = formonly.wc, COMPONENTTYPE="gc_geo", SIZEPOLICY=FIXED, STRETCH=NONE, TABINDEX=0, HEIGHT=300 PIXELS, WIDTH=300 PIXELS;
 
 
 INSTRUCTIONS
 SCREEN RECORD data_column_scr(datatype, LABEL, role);
 SCREEN RECORD data_scr(col01, col02, col03, col04, col05, col06, col07, col08, col09, col10);
+
+SCREEN RECORD color_axis_values_scr(color_axis_value);
+SCREEN RECORD color_axis_colors_scr(color_axis_color);
