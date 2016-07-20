@@ -137,8 +137,6 @@ DEFINE i INTEGER
             CALL gc_line.draw("formonly.wc", g.*)
 
         ON ACTION example1 ATTRIBUTES(TEXT="Example 1")
-            LET data[1].col01 = "Year" 
-
             CALL g.data_column.clear()
             CALL data.clear()
 
@@ -165,6 +163,48 @@ DEFINE i INTEGER
             LET g.legend.position = "bottom"
             
             CALL map_array_to_data(base.TypeInfo.create(data), g.data, "col01,col02,col03")
+            
+            CALL gc_line.draw("formonly.wc", g.*)
+
+        ON ACTION example2 ATTRIBUTES(TEXT="Example 2")
+            CALL g.data_column.clear()
+            CALL data.clear()
+
+            LET g.data_column[1].label = "Day"
+            LET g.data_column[1].type = "number"
+
+            LET g.data_column[2].label = "Guardians of the Galaxy"
+            LET g.data_column[2].type = "number"
+
+            LET g.data_column[3].label = "The Avengers"
+            LET g.data_column[3].type = "number"
+
+            LET g.data_column[4].label = "Transformers: Age of Extinction"
+            LET g.data_column[4].type = "number"
+            
+            CALL set_column_headings_from_column_data(g.data_column)
+
+            LET data[1].col01 = 1    LET data[1].col02 =37.8   LET data[1].col03 =80.8   LET data[1].col04 =41.8
+            LET data[2].col01 = 2    LET data[2].col02 =30.9   LET data[2].col03 =69.5   LET data[2].col04 =32.4
+            LET data[3].col01 = 3    LET data[3].col02 =25.4   LET data[3].col03 =57     LET data[3].col04 =25.7
+            LET data[4].col01 = 4    LET data[4].col02 =11.7   LET data[4].col03 =18.8   LET data[4].col04 =10.5
+            LET data[5].col01 = 5    LET data[5].col02 =11.9   LET data[5].col03 =17.6   LET data[5].col04 =10.4
+            LET data[6].col01 = 6    LET data[6].col02 =8.8    LET data[6].col03 =13.6   LET data[6].col04 =7.7
+            LET data[7].col01 = 7    LET data[7].col02 =7.6    LET data[7].col03 =12.3   LET data[7].col04 =9.6
+            LET data[8].col01 = 8    LET data[8].col02 =12.3   LET data[8].col03 =29.2   LET data[8].col04 =10.6
+            LET data[9].col01 = 9    LET data[9].col02 =16.9   LET data[9].col03 =42.9   LET data[9].col04 =14.8
+            LET data[10].col01 = 10  LET data[10].col02 =12.8  LET data[10].col03 =30.9  LET data[10].col04 =11.6
+            LET data[11].col01 = 11  LET data[11].col02 =5.3   LET data[11].col03 =7.9   LET data[11].col04 =4.7
+            LET data[12].col01 = 12  LET data[12].col02 =6.6   LET data[12].col03 =8.4   LET data[12].col04 =5.2
+            LET data[13].col01 = 13  LET data[13].col02 =4.8   LET data[13].col03 =6.3   LET data[13].col04 =3.6
+            LET data[14].col01 = 14  LET data[14].col02 =4.2   LET data[14].col03 =6.2   LET data[14].col04 =3.4
+            
+            LET g.data_col_count = g.data_column.getLength()
+            LET g.data_row_count = data.getLength()
+            
+            LET g.title = "Box Iffce Earnings in First Two Weeks of Opening"
+            
+            CALL map_array_to_data(base.TypeInfo.create(data), g.data, "col01,col02,col03,col04")
             
             CALL gc_line.draw("formonly.wc", g.*)
             
