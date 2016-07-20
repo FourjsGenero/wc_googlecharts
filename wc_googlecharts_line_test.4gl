@@ -36,7 +36,26 @@ DEFINE i INTEGER
     LET g.height = 275
     LET g.title = "Example Column Chart"
     LET g.width = 275
-    LET g.colors[1] = "blue"
+    LET g.colors[1] = "#3366CC"
+    LET g.colors[2] = "#DC3912"
+    LET g.colors[3] = "#FF9900"
+    LET g.colors[4] = "#109618"
+    LET g.colors[5] = "#990099"
+    LET g.colors[6] = "#3B3EAC"
+    LET g.colors[7] = "#0099C6"
+    LET g.colors[8] = "#DD4477"
+    LET g.colors[9] = "#66AA00"
+    LET g.colors[10] = "#B82E2E"
+    LET g.colors[11] = "#316395"
+    LET g.colors[12] = "#994499"
+    LET g.colors[13] = "#22AA99"
+    LET g.colors[14] = "#AAAA11"
+    LET g.colors[15] = "#6633CC"
+    LET g.colors[16] = "#E67300"
+    LET g.colors[17] = "#8B0707"
+    LET g.colors[18] = "#329262"
+    LET g.colors[19] = "#5574A6"
+    LET g.colors[20] = "#3B3EAC"
 
     -- Other settings can be set programmatically similar to ...
     --LET g.title_text_style.color = "blue"
