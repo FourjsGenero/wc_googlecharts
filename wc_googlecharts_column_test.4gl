@@ -16,7 +16,6 @@ DEFINE data DYNAMIC ARRAY OF RECORD
     col09 STRING,
     col10 STRING
 END RECORD
-DEFINE i INTEGER
 
     INITIALIZE g.* TO NULL
 
@@ -87,6 +86,12 @@ DEFINE i INTEGER
     
     DIALOG ATTRIBUTES(UNBUFFERED)
         INPUT ARRAY g.data_column FROM data_column_scr.* ATTRIBUTES(WITHOUT DEFAULTS=TRUE)
+            ON CHANGE label
+                CALL set_column_headings_from_column_data(g.data_column)
+            ON CHANGE role
+                CALL set_column_headings_from_column_data(g.data_column)
+            ON ROW CHANGE
+                CALL set_column_headings_from_column_data(g.data_column)
         END INPUT
     
         INPUT ARRAY data FROM data_scr.* ATTRIBUTES(WITHOUT DEFAULTS=TRUE)
@@ -161,6 +166,8 @@ DEFINE i INTEGER
             LET g.data_column[4].role = "annotation"
             LET g.data_column[4].type = "string"
 
+            CALL set_column_headings_from_column_data(g.data_column)
+
             LET data[1].col01 = "Copper"   LET data[1].col02 = 8.84  LET data[1].col03 = "#b87333" LET data[1].col04 = "Cu"
             LET data[2].col01 = "Silver"   LET data[2].col02 = 10.49 LET data[2].col03 = "silver"  LET data[2].col04 = "Ag"
             LET data[3].col01 = "Gold"     LET data[3].col02 = 19.30 LET data[3].col03 = "gold"    LET data[3].col04 = "Au"
@@ -173,6 +180,7 @@ DEFINE i INTEGER
             LET g.legend.position = "none"
             
             CALL map_array_to_data(base.TypeInfo.create(data), g.data, "col01,col02,col03,col04")
+            
             CALL gc_column.draw("formonly.wc", g.*)
 
         ON ACTION example2 ATTRIBUTES(TEXT="Example 2")
@@ -187,6 +195,8 @@ DEFINE i INTEGER
 
             LET g.data_column[3].role = "style"
             LET g.data_column[3].type = "string"
+
+            CALL set_column_headings_from_column_data(g.data_column)
             
             LET data[1].col01 = "2010"   LET data[1].col02 = 10  LET data[1].col03 = "color: gray"
             LET data[2].col01 = "2020"   LET data[2].col02 = 14  LET data[2].col03 = "color: #76A7FA"
@@ -227,6 +237,8 @@ DEFINE i INTEGER
 
             LET g.data_column[7].label = "Literature"
             LET g.data_column[7].type = "number"
+
+            CALL set_column_headings_from_column_data(g.data_column)
 
             LET data[1].col01 = "2010" LET data[1].col02 = 10 LET data[1].col03 = 24 LET data[1].col04 = 20 LET data[1].col05 = 32 LET data[1].col06 = 18 LET data[1].col07 = 5  
             LET data[2].col01 = "2011" LET data[2].col02 = 16 LET data[2].col03 = 22 LET data[2].col04 = 23 LET data[2].col05 = 30 LET data[2].col06 = 16 LET data[2].col07 = 9  
@@ -307,4 +319,28 @@ DEFINE i iNTEGER
         CALL sb.append(SFMT("col%1", i USING "&&"))
     END FOR
     RETURN sb.toString()
+END FUNCTION
+
+
+
+PRIVATE FUNCTION set_column_headings_from_column_data(l_data_column)
+DEFINE l_data_column DYNAMIC ARRAY OF RECORD
+    type STRING,
+    label STRING,
+    role STRING
+END RECORD
+
+DEFINE w ui.Window
+DEFINE f ui.Form
+DEFINE i INTEGER
+
+    LET w= ui.Window.getCurrent()
+    LET f = w.getForm()
+
+    FOR i = 1 TO l_data_column.getLength() 
+        CALL f.setElementText(SFMT("formonly.col%1", i USING "&&"), nvl(l_data_column[i].label,l_data_column[i].role))
+    END FOR
+    FOR i = (l_data_column.getLength()+1) TO 10
+        CALL f.setElementText(SFMT("formonly.col%1", i USING "&&"), "")
+    END FOR
 END FUNCTION
