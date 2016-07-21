@@ -23,6 +23,7 @@ PUBLIC TYPE geo_rec RECORD
         colors DYNAMIC ARRAY OF STRING
     END RECORD,
     dataless_region_color STRING,
+    default_color STRING,
     display_mode STRING,
     domain STRING,
     enable_region_interactivity BOOLEAN,

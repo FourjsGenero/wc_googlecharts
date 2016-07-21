@@ -77,8 +77,8 @@ END RECORD
         INPUT g.size_axis.min_size, g.size_axis.max_size, g.size_axis.min_value, g.size_axis.max_value FROM size_axis_min_size, size_axis_max_size,size_axis_min_value, size_axis_max_value  ATTRIBUTES(WITHOUT DEFAULTS=TRUE) 
         END INPUT
 
-        INPUT g.color_axis.min_value, g.color_axis.max_value , g.dataless_region_color
-        FROM color_axis_min_value, color_axis_max_value, dataless_region_color 
+        INPUT g.color_axis.min_value, g.color_axis.max_value , g.dataless_region_color, g.default_color
+        FROM color_axis_min_value, color_axis_max_value, dataless_region_color , default_color
         ATTRIBUTES(WITHOUT DEFAULTS=TRUE) 
         END INPUT
 
@@ -218,6 +218,99 @@ END RECORD
 
             LET g.size_axis.min_value = 0
             LET g.size_axis.max_value = 100
+            
+            CALL map_array_to_data(base.TypeInfo.create(data), g.data, "col01,col02,col03")
+            
+            CALL gc_geo.draw("formonly.wc", g.*)
+
+        ON ACTION example4 ATTRIBUTES(TEXT="Example 4")
+            CALL g.data_column.clear()
+            CALL data.clear()
+            
+            LET g.data_column[1].label = "Country"
+            LET g.data_column[1].type = "string"
+
+            LET g.data_column[2].label = "Latitude"
+            LET g.data_column[2].type = "number"
+            
+            CALL set_column_headings_from_column_data(g.data_column)
+
+            LET data[1].col01 = "Algeria" LET data[1].col02 = 36
+            LET data[2].col01 = "Angola" LET data[2].col02 = -8
+            LET data[3].col01 = "Benin" LET data[3].col02 = 6
+            LET data[4].col01 = "Botswana" LET data[4].col02 = -24
+            LET data[5].col01 = 'Burkina Faso' LET data[5].col02 =12 
+            LET data[6].col01 = 'Burundi' LET data[6].col02 =-3 
+            LET data[7].col01 = 'Cameroon' LET data[7].col02 =3
+            LET data[8].col01 = 'Canary Islands' LET data[8].col02 =28 
+            LET data[9].col01 = 'Cape Verde' LET data[9].col02 =15
+            LET data[10].col01 = 'Central African Republic' LET data[10].col02 =4 
+            LET data[11].col01 = 'Ceuta' LET data[11].col02 =35 
+            LET data[12].col01 = 'Chad' LET data[12].col02 =12
+            LET data[13].col01 = 'Comoros' LET data[13].col02 =-12 
+            LET data[14].col01 = 'Cote d\'Ivoire' LET data[14].col02 =6
+            LET data[15].col01 = 'Democratic Republic of the Congo' LET data[15].col02 =-3 
+            LET data[16].col01 = 'Djibouti' LET data[16].col02 =12
+            LET data[17].col01 = 'Egypt' LET data[17].col02 =26 
+            LET data[18].col01 = 'Equatorial Guinea' LET data[18].col02 =3 
+            LET data[19].col01 = 'Eritrea' LET data[19].col02 =15
+            LET data[20].col01 = 'Ethiopia' LET data[20].col02 =9 
+            LET data[21].col01 = 'Gabon' LET data[21].col02 =0 
+            LET data[22].col01 = 'Gambia' LET data[22].col02 =13 
+            LET data[23].col01 = 'Ghana' LET data[23].col02 =5
+            LET data[24].col01 = 'Guinea' LET data[24].col02 =10 
+            LET data[25].col01 = 'Guinea-Bissau' LET data[25].col02 =12 
+            LET data[26].col01 = 'Kenya' LET data[26].col02 =-1
+            LET data[27].col01 = 'Lesotho' LET data[27].col02 =-29 
+            LET data[28].col01 = 'Liberia' LET data[28].col02 =6 
+            LET data[29].col01 = 'Libya' LET data[29].col02 =32 
+            LET data[30].col01 = 'Madagascar' LET data[30].col02 =null
+            LET data[31].col01 = 'Madeira' LET data[31].col02 =33 
+            LET data[32].col01 = 'Malawi' LET data[32].col02 =-14 
+            LET data[33].col01 = 'Mali' LET data[33].col02 =12 
+            LET data[34].col01 = 'Mauritania' LET data[34].col02 =18
+            LET data[35].col01 = 'Mauritius' LET data[35].col02 =-20 
+            LET data[36].col01 = 'Mayotte' LET data[36].col02 =-13 
+            LET data[37].col01 = 'Melilla' LET data[37].col02 =35
+            LET data[38].col01 = 'Morocco' LET data[38].col02 =32 
+            LET data[39].col01 = 'Mozambique' LET data[39].col02 =-25 
+            LET data[40].col01 = 'Namibia' LET data[40].col02 =-22
+            LET data[41].col01 = 'Niger' LET data[41].col02 =14 
+            LET data[42].col01 = 'Nigeria' LET data[42].col02 =8 
+            LET data[43].col01 = 'Republic of the Congo' LET data[43].col02 =-1
+            LET data[44].col01 = 'Réunion' LET data[44].col02 =-21 
+            LET data[45].col01 = 'Rwanda' LET data[45].col02 =-2 
+            LET data[46].col01 = 'Saint Helena' LET data[46].col02 =-16
+            LET data[47].col01 = 'São Tomé and Principe' LET data[47].col02 =0 
+            LET data[48].col01 = 'Senegal' LET data[48].col02 =15
+            LET data[49].col01 = 'Seychelles' LET data[49].col02 =-5 
+            LET data[50].col01 = 'Sierra Leone' LET data[50].col02 =8 
+            LET data[51].col01 = 'Somalia' LET data[51].col02 =2
+            LET data[52].col01 = 'Sudan' LET data[52].col02 =15 
+            LET data[53].col01 = 'South Africa' LET data[53].col02 =-30 
+            LET data[54].col01 = 'South Sudan' LET data[54].col02 =5
+            LET data[55].col01 = 'Swaziland' LET data[55].col02 =-26 
+            LET data[56].col01 = 'Tanzania' LET data[56].col02 =-6 
+            LET data[57].col01 = 'Togo' LET data[57].col02 =6 
+            LET data[58].col01 = 'Tunisia' LET data[58].col02 =34
+            LET data[59].col01 = 'Uganda' LET data[59].col02 =1 
+            LET data[60].col01 = 'Western Sahara' LET data[60].col02 =25 
+            LET data[61].col01 = 'Zambia' LET data[61].col02 =-15
+            LET data[62].col01 = 'Zimbabwe' LET data[62].col02 =-18
+              
+            LET g.data_col_count = g.data_column.getLength()
+            LET g.data_row_count = data.getLength()
+
+            LET g.region = "002"
+            
+            LET g.color_axis.colors[1] = "#00853f"
+            LET g.color_axis.colors[2] = "black"
+            LET g.color_axis.colors[3] = "#e31b23"
+
+            LET g.background_color.fill = "#81d4fa"
+            LET g.dataless_region_color = "#f8bbd0"
+            LET g.default_color = "#f5f5f5"
+            
             
             CALL map_array_to_data(base.TypeInfo.create(data), g.data, "col01,col02,col03")
             
