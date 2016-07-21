@@ -24,9 +24,37 @@ END
 PAGE (TEXT="Rendering")
 GRID
 {
-Width-Height        [r01      |r02      ]
-Region              [r03                ]
-Display Mode        [r04                ]
+Width-Height                [r01      |r02      ]
+Region                      [r03                ]
+Display Mode                [r04                ]
+Domain                      [r05                ]
+Keep Aspect Ratio           [r06                ]
+Marker Opacity              [r07                ]
+Resolution                  [r08                ]
+Enable Region Interactivity [r09                ]
+}
+END
+END
+
+PAGE (TEXT="Background")
+GRID
+{
+Fill         [bk01      ]
+Stroke       [bk02      ]  
+Stroke-Width [bk03      ]    
+}
+END
+END
+
+PAGE (TEXT="Legend")
+GRID
+{
+Number Format[lg01               ]
+Color        [lg04               ]
+Font Name    [lg05               ]
+Font Size    [lg06               ]
+Bold         [lg07               ]
+Italic       [lg08               ]
 }
 END
 END
@@ -40,13 +68,23 @@ Value Min-Max   [s03       |s04        ]
 END
 END
 
+PAGE (TEXT="Magnifying Glass")
+GRID
+{
+Enable       [mg01       ]
+Zoom Factor  [mg02       ]
+}
+END
+END
+
 
 PAGE (TEXT="Colors")
 VBOX
 GRID
 {
-Min Value         [c01                ]
-Max Value         [c02                ]
+Min Value             [c01                ]
+Max Value             [c02                ]
+Dataless Region Color [c05                ]
 }
 END
 HBOX
@@ -63,6 +101,24 @@ END #TABLE
 END #HBOX
 END #VBOX
 END #PAGE
+
+PAGE(TEXT="Tooltip")
+GRID
+{
+Ignore Bounds         [tt01              ]
+Is Html               [tt02              ]
+Show Color Code       [tt03              ]
+Color                 [tt05              ]
+Font Name             [tt06              ]
+Font Size             [tt07              ]
+Bold                  [tt08              ]
+Italic                [tt09              ]
+Trigger               [tt10              ]
+
+}
+END
+END
+
 END #FOLDER
 
 GROUP (TEXT="Geo")
@@ -108,6 +164,23 @@ EDIT r02 = formonly.HEIGHT, NOT NULL;
 COMBOBOX r03 = formonly.display_mode, ITEMS=("auto","regions","markers","text");
 EDIT r04 = formonly.region;
 
+EDIT r05 = formonly.domain;
+CHECKBOX r06 = formonly.keep_aspect_ratio, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
+EDIT r07 = formonly.marker_opacity;
+COMBOBOX r08 = formonly.resolution, ITEMS=("countries","provinces","metros");
+CHECKBOX r09 = formonly.enable_region_interactivity, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
+
+EDIT bk01 = formonly.background_color_fill;
+EDIT bk02 = formonly.background_color_stroke;
+SPINEDIT bk03 = formonly.background_color_stroke_width, VALUEMIN=0;
+
+EDIT lg01 = formonly.legend_number_format;
+EDIT lg04 = formonly.legend_text_style_color;
+EDIT lg05 = formonly.legend_text_style_font_name;
+SPINEDIT lg06 = formonly.legend_text_style_font_size, VALUEMIN=0;
+CHECKBOX lg07 = formonly.legend_text_style_bold, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
+CHECKBOX lg08 = formonly.legend_text_style_italic, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
+
 EDIT s01 = formonly.size_axis_min_size;
 EDIT s02 = formonly.size_axis_max_size;
 EDIT s03 = formonly.size_axis_min_value;
@@ -115,9 +188,26 @@ EDIT s04 = formonly.size_axis_max_value;
 
 EDIT c01 = formonly.color_axis_min_value;
 EDIT c02 = formonly.color_axis_max_value;
+EDIT c05 = formonly.dataless_region_color;
 
 EDIT c03 = formonly.color_axis_value;
 EDIT c04 = formonly.color_axis_color;
+
+CHECKBOX mg01 = formonly.magnifying_glass_enable, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE; 
+EDIT mg02 = formonly.magnifying_glass_zoom_factor;
+
+CHECKBOX tt01 = formonly.tooltip_ignore_bounds, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE; 
+CHECKBOX tt02 = formonly.tooltip_is_html, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE; 
+CHECKBOX tt03 = formonly.tooltip_show_color_code, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE; 
+#COMBOBOX tt04 = formonly.tooltip_text, ITEMS=('both','value','percentage');
+EDIT tt05 = formonly.tooltip_text_style_color;
+EDIT tt06 = formonly.tooltip_text_style_font_name;
+EDIT tt07 = formonly.tooltip_text_style_font_size;
+CHECKBOX tt08 = formonly.tooltip_text_style_bold, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
+CHECKBOX tt09 = formonly.tooltip_text_style_italic, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
+COMBOBOX tt10 = formonly.tooltip_trigger, ITEMS=('focus','none','selection');
+
+
 
 WEBCOMPONENT wc01 = formonly.wc, COMPONENTTYPE="gc_geo", SIZEPOLICY=FIXED, STRETCH=NONE, TABINDEX=0, HEIGHT=300 PIXELS, WIDTH=300 PIXELS;
 

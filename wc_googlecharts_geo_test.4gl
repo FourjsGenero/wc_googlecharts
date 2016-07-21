@@ -58,13 +58,28 @@ END RECORD
         INPUT ARRAY data FROM data_scr.* ATTRIBUTES(WITHOUT DEFAULTS=TRUE)
         END INPUT
 
-        INPUT BY NAME g.width, g.height, g.region, g.display_mode ATTRIBUTES(WITHOUT DEFAULTS=TRUE) 
+        INPUT BY NAME g.width, g.height, g.region, g.display_mode, g.domain, g.keep_aspect_ratio, g.marker_opacity, g.resolution, g.enable_region_interactivity 
+        ATTRIBUTES(WITHOUT DEFAULTS=TRUE) 
+        END INPUT
+
+        INPUT g.background_color.fill, g.background_color.stroke, g.background_color.stroke_width
+        FROM background_color_fill, background_color_stroke, background_color_stroke_width
+        ATTRIBUTES (WITHOUT DEFAULTS=TRUE)
+        END INPUT
+
+        INPUT g.legend.number_format, 
+              g.legend.text_style.color, g.legend.text_style.font_name, g.legend.text_style.font_size, g.legend.text_style.bold, g.legend.text_style.italic
+        FROM legend_number_format,
+             legend_text_style_color, legend_text_style_font_name, legend_text_style_font_size, legend_text_style_bold, legend_text_style_italic
+        ATTRIBUTES (WITHOUT DEFAULTS=TRUE)
         END INPUT
 
         INPUT g.size_axis.min_size, g.size_axis.max_size, g.size_axis.min_value, g.size_axis.max_value FROM size_axis_min_size, size_axis_max_size,size_axis_min_value, size_axis_max_value  ATTRIBUTES(WITHOUT DEFAULTS=TRUE) 
         END INPUT
 
-        INPUT g.color_axis.min_value, g.color_axis.max_value FROM color_axis_min_value, color_axis_max_value ATTRIBUTES(WITHOUT DEFAULTS=TRUE) 
+        INPUT g.color_axis.min_value, g.color_axis.max_value , g.dataless_region_color
+        FROM color_axis_min_value, color_axis_max_value, dataless_region_color 
+        ATTRIBUTES(WITHOUT DEFAULTS=TRUE) 
         END INPUT
 
         INPUT ARRAY g.color_axis.values 
@@ -74,6 +89,20 @@ END RECORD
 
         INPUT ARRAY g.color_axis.colors 
         FROM color_axis_colors_scr.*
+        ATTRIBUTES (WITHOUT DEFAULTS=TRUE)
+        END INPUT
+
+        INPUT g.magnifying_glass.enable, g.magnifying_glass.zoom_factor
+        FROM magnifying_glass_enable, magnifying_glass_zoom_factor
+        ATTRIBUTES (WITHOUT DEFAULTS=TRUE)
+        END INPUT
+
+        INPUT g.tooltip.ignore_bounds, g.tooltip.is_html, g.tooltip.show_color_code, {g.tooltip.text,}
+        g.tooltip.text_style.color, g.tooltip.text_style.font_name, g.tooltip.text_style.font_size, g.tooltip.text_style.bold, g.tooltip.text_style.italic, 
+        g.tooltip.trigger
+        FROM tooltip_ignore_bounds, tooltip_is_html, tooltip_show_color_code, {tooltip_text,}
+        tooltip_text_style_color, tooltip_text_style_font_name, tooltip_text_style_font_size, tooltip_text_style_bold, tooltip_text_style_italic, 
+        tooltip_trigger
         ATTRIBUTES (WITHOUT DEFAULTS=TRUE)
         END INPUT
 
@@ -175,8 +204,8 @@ END RECORD
             CALL set_column_headings_from_column_data(g.data_column)
 
             LET data[1].col01 = 'France'      LET data[1].col02 =  65700000   LET data[1].col03 =   50
-            LET data[2].col01 = 'Germany'     LET data[2].col02 =  81890000   LET data[2].col03 =    27
-            LET data[3].col01 = 'Poland'      LET data[3].col02 =  38540000   LET data[3].col03 =    23            
+            LET data[2].col01 = 'Germany'     LET data[2].col02 =  81890000   LET data[2].col03 =   27
+            LET data[3].col01 = 'Poland'      LET data[3].col02 =  38540000   LET data[3].col03 =   23            
             
             LET g.data_col_count = g.data_column.getLength()
             LET g.data_row_count = data.getLength()

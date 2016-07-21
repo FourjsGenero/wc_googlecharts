@@ -51,20 +51,60 @@
          var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));   
          
          var options  = {
+
+                         backgroundColor: {
+                                            strokeWidth: properties.background_color.stroke_width,
+                                            stroke: properties.background_color.stroke,
+                                            fill: properties.background_color.fill
+                                           } ,
                           colorAxis: {
                             minValue: properties.color_axis.min_value,
                             maxValue: properties.color_axis.max_value,
                             values: properties.color_axis.values,
                             colors: properties.color_axis.colors
                           },
+                          datalessRegionColor: properties.dataless_region_color,
                           displayMode: properties.display_mode,
+                          domain: properties.domain,
+                          enableRegionInteractivity: properties.enable_region_interactivity,
                           height: properties.height,
+                          keepAspectRatio: properties.keep_aspect_ratio,
+                          legend: {
+                                   numberFormat: properties.legend.number_format,
+                                   textStyle: {
+                                               color: properties.legend.text_style.color,
+                                               fontName: properties.legend.text_style.font_name,
+                                               fontSize: properties.legend.text_style.font_size,
+                                               bold: properties.legend.text_style.bold,
+                                               italic: properties.legend.text_style.italic
+                                               }
+                                  } ,
+                          magnifyingGlass: {
+                                enable: properties.magnifying_glass.enable,
+                                zoom_factor: properties.magnifying_glass.zoom_factor
+                          },
+                          markerOpacity: properties.marker_opacity,
                           region: properties.region,
+                          resolution: properties.resolution,
                           sizeAxis: {
                               minSize: properties.size_axis.min_size,
                               maxSize: properties.size_axis.max_size,
                               minValue: properties.size_axis.min_value,
                               maxValue: properties.size_axis.max_value
+                          },
+                          tooltip: {
+                                    ignoreBounds: properties.tooltip.ignore_bounds,
+                                    isHtml: properties.tooltip.is_html,
+                                    showColorCode: properties.tooltip.show_color_code,
+                                    text: properties.tooltip.text,
+                                    textStyle: {
+                                                color: properties.tooltip.text_style.color,
+                                                fontName: properties.tooltip.text_style.font_name,
+                                                fontSize: properties.tooltip.text_style.font_size,
+                                                bold: properties.tooltip.text_style.bold,
+                                                italic: properties.tooltip.text_style.italic
+                                               },
+                                    trigger: properties.tooltip.trigger
                           },
                           width: properties.width
          };

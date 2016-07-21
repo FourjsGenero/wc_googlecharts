@@ -11,20 +11,59 @@ PUBLIC TYPE geo_rec RECORD
 
     data DYNAMIC ARRAY WITH DIMENSION 2 OF STRING,
 
+    background_color RECORD
+        stroke_width INTEGER,
+        stroke STRING,
+        fill STRING
+    END RECORD,
     color_axis RECORD
         min_value FLOAT,
         max_value FLOAT,
         values DYNAMIC ARRAY OF STRING,
         colors DYNAMIC ARRAY OF STRING
     END RECORD,
+    dataless_region_color STRING,
     display_mode STRING,
+    domain STRING,
+    enable_region_interactivity BOOLEAN,
     height INTEGER,
+    keep_aspect_ratio BOOLEAN,
+    legend RECORD
+        number_format STRING,
+        text_style RECORD
+            color STRING,
+            font_name STRING,
+            font_size INTEGER,
+            bold BOOLEAN,
+            italic BOOLEAN
+        END RECORD
+    END RECORD,
+    magnifying_glass RECORD
+        enable BOOLEAN,
+        zoom_factor FLOAT
+    END RECORD,
+    marker_opacity FLOAT,
     region STRING, 
+    resolution STRING,
     size_axis RECORD
         min_size FLOAT,
         max_size FLOAT,
         min_value FLOAT,
         max_value FLOAT
+    END RECORD,
+    tooltip RECORD
+        ignore_bounds BOOLEAN,
+        is_html BOOLEAN,
+        show_color_code BOOLEAN,
+--        text STRING,
+        text_style RECORD
+            color STRING,
+            font_name STRING,
+            font_size INTEGER,
+            bold BOOLEAN,
+            italic BOOLEAN
+        END RECORD,
+        trigger STRING
     END RECORD,
     width INTEGER
 END RECORD
