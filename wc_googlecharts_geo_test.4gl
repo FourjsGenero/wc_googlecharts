@@ -61,6 +61,9 @@ END RECORD
         INPUT BY NAME g.width, g.height, g.region, g.display_mode ATTRIBUTES(WITHOUT DEFAULTS=TRUE) 
         END INPUT
 
+        INPUT g.size_axis.min_size, g.size_axis.max_size, g.size_axis.min_value, g.size_axis.max_value FROM size_axis_min_size, size_axis_max_size,size_axis_min_value, size_axis_max_value  ATTRIBUTES(WITHOUT DEFAULTS=TRUE) 
+        END INPUT
+
         INPUT g.color_axis.min_value, g.color_axis.max_value FROM color_axis_min_value, color_axis_max_value ATTRIBUTES(WITHOUT DEFAULTS=TRUE) 
         END INPUT
 
@@ -151,6 +154,41 @@ END RECORD
 
             LET g.color_axis.colors[1] = "green"
             LET g.color_axis.colors[2] = "blue"
+            
+            CALL map_array_to_data(base.TypeInfo.create(data), g.data, "col01,col02,col03")
+            
+            CALL gc_geo.draw("formonly.wc", g.*)
+
+        ON ACTION example3 ATTRIBUTES(TEXT="Example 3")
+            CALL g.data_column.clear()
+            CALL data.clear()
+            
+            LET g.data_column[1].label = "Country"
+            LET g.data_column[1].type = "string"
+
+            LET g.data_column[2].label = "Population"
+            LET g.data_column[2].type = "number"
+
+            LET g.data_column[3].label = "Area Percentage"
+            LET g.data_column[3].type = "number"
+
+            CALL set_column_headings_from_column_data(g.data_column)
+
+            LET data[1].col01 = 'France'      LET data[1].col02 =  65700000   LET data[1].col03 =   50
+            LET data[2].col01 = 'Germany'     LET data[2].col02 =  81890000   LET data[2].col03 =    27
+            LET data[3].col01 = 'Poland'      LET data[3].col02 =  38540000   LET data[3].col03 =    23            
+            
+            LET g.data_col_count = g.data_column.getLength()
+            LET g.data_row_count = data.getLength()
+
+            LET g.region = "155"
+            LET g.display_mode = "markers"
+
+            LET g.color_axis.colors[1] = "#e7711c"
+            LET g.color_axis.colors[2] = "#4374e0"
+
+            LET g.size_axis.min_value = 0
+            LET g.size_axis.max_value = 100
             
             CALL map_array_to_data(base.TypeInfo.create(data), g.data, "col01,col02,col03")
             

@@ -20,6 +20,12 @@ PUBLIC TYPE geo_rec RECORD
     display_mode STRING,
     height INTEGER,
     region STRING, 
+    size_axis RECORD
+        min_size FLOAT,
+        max_size FLOAT,
+        min_value FLOAT,
+        max_value FLOAT
+    END RECORD,
     width INTEGER
 END RECORD
 

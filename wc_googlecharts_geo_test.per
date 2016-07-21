@@ -30,6 +30,17 @@ Display Mode        [r04                ]
 }
 END
 END
+
+PAGE (TEXT="Size Axis")
+GRID
+{
+Size Min-Max    [s01       |s02        ]         
+Value Min-Max   [s03       |s04        ] 
+} 
+END
+END
+
+
 PAGE (TEXT="Colors")
 VBOX
 GRID
@@ -96,6 +107,11 @@ EDIT r02 = formonly.HEIGHT, NOT NULL;
 
 COMBOBOX r03 = formonly.display_mode, ITEMS=("auto","regions","markers","text");
 EDIT r04 = formonly.region;
+
+EDIT s01 = formonly.size_axis_min_size;
+EDIT s02 = formonly.size_axis_max_size;
+EDIT s03 = formonly.size_axis_min_value;
+EDIT s04 = formonly.size_axis_max_value;
 
 EDIT c01 = formonly.color_axis_min_value;
 EDIT c02 = formonly.color_axis_max_value;
