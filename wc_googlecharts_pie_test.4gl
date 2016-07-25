@@ -41,7 +41,7 @@ DEFINE i INTEGER
     LET g.height = 275
     LET g.title = "Example Pie Chart"
     LET g.width = 275
-    LET g.colors[1] = "blue"
+    
 
     -- Other settings can be set programmatically similar to ...
     --LET g.title_text_style.color = "blue"
@@ -155,6 +155,201 @@ DEFINE i INTEGER
             LET g.data_row_count = data.getLength()
             CALL map_array_to_slice(base.TypeInfo.create(data), g.slices,"color","offset","text_style_color","text_style_font_name","text_style_font_size")
             CALL gc_pie.draw("formonly.wc", g.*)
+
+         ON ACTION example1 ATTRIBUTES(TEXT="Example 1")
+            CALL g.data_column.clear()
+            CALL data.clear()
+
+            LET g.title = "My Daily Activities"
+
+            LET g.data_col_count = 2
+            LET g.data_column[1].label = "Task"
+            LET g.data_column[1].type = "string"
+            LET g.data_column[2].label = "Hours per Day"
+            LET g.data_column[2].type = "number"
+   
+
+            LET data[1].label = "Work"       LET data[1].value = 11
+            LET data[2].label = "Eat"        LET data[2].value = 2
+            LET data[3].label = "Commute"    LET data[3].value = 2
+            LET data[4].label = "Watch TV"   LET data[4].value = 2
+            LET data[5].label = "Sleep"      LET data[5].value = 7            
+            
+            CALL map_array_to_data(base.TypeInfo.create(data), g.data, "label","value","")
+            LET g.data_row_count = data.getLength()
+            CALL map_array_to_slice(base.TypeInfo.create(data), g.slices,"color","offset","text_style_color","text_style_font_name","text_style_font_size")
+            CALL gc_pie.draw("formonly.wc", g.*)
+
+         ON ACTION example2 ATTRIBUTES(TEXT="Example 2")
+            CALL g.data_column.clear()
+            CALL data.clear()
+
+            LET g.data_col_count = 2
+            LET g.data_column[1].label = "Task"
+            LET g.data_column[1].type = "string"
+            LET g.data_column[2].label = "Hours per Day"
+            LET g.data_column[2].type = "number"
+   
+            LET data[1].label = "Work"       LET data[1].value = 11
+            LET data[2].label = "Eat"        LET data[2].value = 2
+            LET data[3].label = "Commute"    LET data[3].value = 2
+            LET data[4].label = "Watch TV"   LET data[4].value = 2
+            LET data[5].label = "Sleep"      LET data[5].value = 7  
+
+            LET g.title = "My Daily Activities"
+            LET g.is3d = TRUE  
+            
+            CALL map_array_to_data(base.TypeInfo.create(data), g.data, "label","value","")
+            LET g.data_row_count = data.getLength()
+            CALL map_array_to_slice(base.TypeInfo.create(data), g.slices,"color","offset","text_style_color","text_style_font_name","text_style_font_size")
+            CALL gc_pie.draw("formonly.wc", g.*)
+
+         ON ACTION example3 ATTRIBUTES(TEXT="Example 3")
+            CALL g.data_column.clear()
+            CALL data.clear()
+
+            LET g.data_col_count = 2
+            LET g.data_column[1].label = "Task"
+            LET g.data_column[1].type = "string"
+            LET g.data_column[2].label = "Hours per Day"
+            LET g.data_column[2].type = "number"
+   
+            LET data[1].label = "Work"       LET data[1].value = 11
+            LET data[2].label = "Eat"        LET data[2].value = 2
+            LET data[3].label = "Commute"    LET data[3].value = 2
+            LET data[4].label = "Watch TV"   LET data[4].value = 2
+            LET data[5].label = "Sleep"      LET data[5].value = 7  
+
+            LET g.title = "My Daily Activities"
+            LET g.pie_hole = 0.4
+            
+            CALL map_array_to_data(base.TypeInfo.create(data), g.data, "label","value","")
+            LET g.data_row_count = data.getLength()
+            CALL map_array_to_slice(base.TypeInfo.create(data), g.slices,"color","offset","text_style_color","text_style_font_name","text_style_font_size")
+            CALL gc_pie.draw("formonly.wc", g.*)
+
+        ON ACTION example4 ATTRIBUTES(TEXT="Example 4")
+            CALL g.data_column.clear()
+            CALL data.clear()
+
+            LET g.data_col_count = 2
+            LET g.data_column[1].label = "Language"
+            LET g.data_column[1].type = "string"
+            LET g.data_column[2].label = "Speakers (in millions)"
+            LET g.data_column[2].type = "number"
+   
+            LET data[1].label = "German"     LET data[1].value = 5.85
+            LET data[2].label = "French"     LET data[2].value = 1.66
+            LET data[3].label = "Italian"    LET data[3].value = 0.316
+            LET data[4].label = "Romansh"    LET data[4].value = 0.0791
+
+            LET g.title = "Swiss Language Use"
+            LET g.legend.position = "none"
+            LET g.pie_slice.text = "label"
+            LET g.pie_start_angle= 100
+            
+            CALL map_array_to_data(base.TypeInfo.create(data), g.data, "label","value","")
+            LET g.data_row_count = data.getLength()
+            CALL map_array_to_slice(base.TypeInfo.create(data), g.slices,"color","offset","text_style_color","text_style_font_name","text_style_font_size")
+            CALL gc_pie.draw("formonly.wc", g.*)
+
+        ON ACTION example5 ATTRIBUTES(TEXT="Example 5")
+            CALL g.data_column.clear()
+            CALL data.clear()
+
+            LET g.data_col_count = 2
+            LET g.data_column[1].label = "Language"
+            LET g.data_column[1].type = "string"
+            LET g.data_column[2].label = "Speakers (in millions)"
+            LET g.data_column[2].type = "number"
+   
+            LET data[1].label = "Assamese"     LET data[1].value = 13
+            LET data[2].label = "Bengali"     LET data[2].value = 83
+            LET data[3].label = "Bodo"     LET data[3].value = 1.4
+            LET data[4].label = "Dogri"     LET data[4].value = 2.3
+            LET data[5].label = "Gujarati"     LET data[5].value = 46
+            LET data[6].label = "Hindi"     LET data[6].value = 300
+            LET data[7].label = "Kannada"     LET data[7].value = 38
+            LET data[8].label = "Kashmiri"     LET data[8].value = 5.5
+            LET data[9].label = "Konkani"     LET data[9].value = 5
+            LET data[10].label = "Maithili"     LET data[10].value = 20
+            LET data[11].label = "Malayalam"     LET data[11].value = 33
+            LET data[12].label = "Manipuri"     LET data[12].value = 1.5
+            LET data[13].label = "Marathi"     LET data[13].value = 72
+            LET data[14].label = "Nepali"     LET data[14].value = 2.9
+            LET data[15].label = "Oriya"     LET data[15].value = 33
+            LET data[16].label = "Punjabi"     LET data[16].value = 29
+            LET data[17].label = "Sanskrit"     LET data[17].value = 0.01
+            LET data[18].label = "Santhali"     LET data[18].value = 6.5
+            LET data[19].label = "Sindhi"     LET data[19].value = 2.5
+            LET data[20].label = "Tamil"     LET data[20].value = 61
+            LET data[21].label = "Telugu"     LET data[21].value = 74
+            LET data[22].label = "Urdu"     LET data[21].value = 52
+        
+            LET data[5].offset = 0.2
+            LET data[13].offset = 0.3
+            LET data[15].offset = 0.4
+            LET data[16].offset = 0.5
+            
+            LET g.title = "Indian Language Use"
+            LET g.legend.position = "none"
+            LET g.pie_slice.text = "label"
+            
+            CALL map_array_to_data(base.TypeInfo.create(data), g.data, "label","value","")
+            LET g.data_row_count = data.getLength()
+            CALL map_array_to_slice(base.TypeInfo.create(data), g.slices,"color","offset","text_style_color","text_style_font_name","text_style_font_size")
+            CALL gc_pie.draw("formonly.wc", g.*)       
+
+        ON ACTION example6 ATTRIBUTES(TEXT="Example 6")
+            CALL g.data_column.clear()
+            CALL data.clear()
+
+            LET g.data_col_count = 2
+            LET g.data_column[1].label = "Pac Man"
+            LET g.data_column[1].type = "string"
+            LET g.data_column[2].label = "Percentage"
+            LET g.data_column[2].type = "number"
+   
+            LET data[1].label = ""     LET data[1].value = 75
+            LET data[2].label = ""     LET data[2].value = 25
+            
+            LET data[1].color = "yellow"
+            LET data[2].color = "transparent"
+
+            LET g.title = ""
+            LET g.legend.position = "none"
+            LET g.pie_slice.text = "none"
+            LET g.pie_start_angle= 135
+            LET g.tooltip.trigger = "none"
+            
+            CALL map_array_to_data(base.TypeInfo.create(data), g.data, "label","value","")
+            LET g.data_row_count = data.getLength()
+            CALL map_array_to_slice(base.TypeInfo.create(data), g.slices,"color","offset","text_style_color","text_style_font_name","text_style_font_size")
+            CALL gc_pie.draw("formonly.wc", g.*)      
+   
+        ON ACTION example7 ATTRIBUTES(TEXT="Example 7")
+            CALL g.data_column.clear()
+            CALL data.clear()
+
+            LET g.data_col_count = 2
+            LET g.data_column[1].label = "Pizza"
+            LET g.data_column[1].type = "string"
+            LET g.data_column[2].label = "Popularity"
+            LET g.data_column[2].type = "number"
+   
+            LET data[1].label = "Pepperoni"     LET data[1].value = 33
+            LET data[2].label = "Hawaiian"      LET data[2].value = 26
+            LET data[3].label = "Mushroom"      LET data[3].value = 22
+            LET data[4].label = "Sausage"       LET data[4].value = 10
+            LET data[5].label = "Anchovies"     LET data[5].value = 9
+            
+            LET g.title = "Popularity of Types of Pizza"
+            LET g.slice_visibility_threshold = 0.2
+            
+            CALL map_array_to_data(base.TypeInfo.create(data), g.data, "label","value","")
+            LET g.data_row_count = data.getLength()
+            CALL map_array_to_slice(base.TypeInfo.create(data), g.slices,"color","offset","text_style_color","text_style_font_name","text_style_font_size")
+            CALL gc_pie.draw("formonly.wc", g.*)       
 
         ON ACTION random ATTRIBUTES(TEXT="Random")
             -- randomise data
