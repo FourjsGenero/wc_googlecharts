@@ -1,8 +1,9 @@
 IMPORT FGL gc_column
 IMPORT util
 
-FUNCTION googlecharts_column_test()
 DEFINE g gc_column.column_rec
+
+FUNCTION googlecharts_column_test()
 DEFINE wc STRING
 DEFINE data DYNAMIC ARRAY OF RECORD
     col01 STRING,
@@ -17,70 +18,7 @@ DEFINE data DYNAMIC ARRAY OF RECORD
     col10 STRING
 END RECORD
 
-    INITIALIZE g.* TO NULL
-
-    -- Set the data
-    --LET g.data_col_count = 3
-    --LET g.data_row_count = 4
-    --LET g.data_column[1].label = "Area"
-    --LET g.data_column[1].type = "string"
-    --LET g.data_column[2].label = "Sales"
-    --LET g.data_column[2].type = "number"
-    --LET g.data_column[3].role = "tooltip"
-    --LET g.data_column[3].type = "string"
---
-    --LET data[1].label = "North"      LET data[1].value = 1000
-    --LET data[2].label = "East"       LET data[2].value = 2000
-    --LET data[3].label = "South"      LET data[3].value = 3000
-    --LET data[4].label = "West"       LET data[4].value = 4000
-
-    -- Set some minumum settings for the pie chart
-    LET g.chart_area.left = 50
-    LET g.chart_area.top = 50
-    LET g.chart_area.height = 200
-    LET g.chart_area.width = 200
-    LET g.height = 275
-    LET g.title = "Example Column Chart"
-    LET g.width = 275
-    LET g.colors[1] = "#3366CC"
-    LET g.colors[2] = "#DC3912"
-    LET g.colors[3] = "#FF9900"
-    LET g.colors[4] = "#109618"
-    LET g.colors[5] = "#990099"
-    LET g.colors[6] = "#3B3EAC"
-    LET g.colors[7] = "#0099C6"
-    LET g.colors[8] = "#DD4477"
-    LET g.colors[9] = "#66AA00"
-    LET g.colors[10] = "#B82E2E"
-    LET g.colors[11] = "#316395"
-    LET g.colors[12] = "#994499"
-    LET g.colors[13] = "#22AA99"
-    LET g.colors[14] = "#AAAA11"
-    LET g.colors[15] = "#6633CC"
-    LET g.colors[16] = "#E67300"
-    LET g.colors[17] = "#8B0707"
-    LET g.colors[18] = "#329262"
-    LET g.colors[19] = "#5574A6"
-    LET g.colors[20] = "#3B3EAC"
-
-    -- Other settings can be set programmatically similar to ...
-    --LET g.title_text_style.color = "blue"
-    --LET g.title_text_style.font_name = "Arial"
-    --LET g.title_text_style.font_size = 16
-    --LET g.title_text_style.bold = TRUE
-    --LET g.title_text_style.italic = TRUE
-    --LET g.is3D = TRUE
-
-    --LET g.legend.alignment="center"
-    --LET g.legend.position = "right"
-    --LET g.legend.max_lines = 1
-    --LET g.legend.text_style.color = "red"
-    --LET g.legend.text_style.font_name = "Arial"
-    --LET g.legend.text_style.font_size = 25
-    --LET g.legend.text_style.bold = FALSE
-    --LET g.legend.text_style.italic = FALSE
-    --LET g.chart_area.background_color.stroke = "red"
-    --LET g.chart_area.background_color.stroke_width= 100
+    CALL init_parameters()
     
     OPEN WINDOW column_test WITH FORM "wc_googlecharts_column_test"
     
@@ -151,7 +89,7 @@ END RECORD
             CALL gc_column.draw("formonly.wc", g.*)
 
         ON ACTION example1 ATTRIBUTES(TEXT="Example 1")
-            CALL g.data_column.clear()
+            CALL init_parameters()
             CALL data.clear()
             
             LET g.data_column[1].label = "Element"
@@ -184,7 +122,7 @@ END RECORD
             CALL gc_column.draw("formonly.wc", g.*)
 
         ON ACTION example2 ATTRIBUTES(TEXT="Example 2")
-            CALL g.data_column.clear()
+            CALL init_parameters()
             CALL data.clear()
 
             LET g.data_column[1].label = "Year"
@@ -214,7 +152,7 @@ END RECORD
             CALL gc_column.draw("formonly.wc", g.*)
 
         ON ACTION example3 ATTRIBUTES(TEXT="Example 3")
-            CALL g.data_column.clear()
+            CALL init_parameters()
             CALL data.clear()
 
             LET g.data_column[1].label = "Genre"
@@ -248,7 +186,9 @@ END RECORD
             LET g.data_row_count = data.getLength()
 
             LET g.title = "Stacked Example"
-            LET g.legend.position = "none"
+            LET g.legend.position = "top"
+            LET g.legend.max_lines = 3
+            LET g.is_stacked = "true"
 
             CALL map_array_to_data(base.TypeInfo.create(data), g.data, "col01,col02,col03,col04,col05,col06,col07")
             CALL gc_column.draw("formonly.wc", g.*)
@@ -343,4 +283,35 @@ DEFINE i INTEGER
     FOR i = (l_data_column.getLength()+1) TO 10
         CALL f.setElementText(SFMT("formonly.col%1", i USING "&&"), "")
     END FOR
+END FUNCTION
+
+
+PRIVATE FUNCTION init_parameters()
+    INITIALIZE g.* TO NULL
+    LET g.chart_area.left = 50
+    LET g.chart_area.top = 50
+    LET g.chart_area.height = 200
+    LET g.chart_area.width = 200
+    LET g.height = 275
+    LET g.width = 275
+    LET g.colors[1] = "#3366CC"
+    LET g.colors[2] = "#DC3912"
+    LET g.colors[3] = "#FF9900"
+    LET g.colors[4] = "#109618"
+    LET g.colors[5] = "#990099"
+    LET g.colors[6] = "#3B3EAC"
+    LET g.colors[7] = "#0099C6"
+    LET g.colors[8] = "#DD4477"
+    LET g.colors[9] = "#66AA00"
+    LET g.colors[10] = "#B82E2E"
+    LET g.colors[11] = "#316395"
+    LET g.colors[12] = "#994499"
+    LET g.colors[13] = "#22AA99"
+    LET g.colors[14] = "#AAAA11"
+    LET g.colors[15] = "#6633CC"
+    LET g.colors[16] = "#E67300"
+    LET g.colors[17] = "#8B0707"
+    LET g.colors[18] = "#329262"
+    LET g.colors[19] = "#5574A6"
+    LET g.colors[20] = "#3B3EAC"
 END FUNCTION

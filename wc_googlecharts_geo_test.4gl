@@ -1,8 +1,9 @@
 IMPORT FGL gc_geo
 IMPORT util
 
-FUNCTION googlecharts_geo_test()
 DEFINE g gc_geo.geo_rec
+
+FUNCTION googlecharts_geo_test()
 DEFINE wc STRING
 DEFINE data DYNAMIC ARRAY OF RECORD
     col01 STRING,
@@ -17,31 +18,7 @@ DEFINE data DYNAMIC ARRAY OF RECORD
     col10 STRING
 END RECORD
 
-    INITIALIZE g.* TO NULL
-
-    -- Set some minumum settings for the pie chart
-    LET g.height = 275
-    LET g.width = 275
-    
-
-    -- Other settings can be set programmatically similar to ...
-    --LET g.title_text_style.color = "blue"
-    --LET g.title_text_style.font_name = "Arial"
-    --LET g.title_text_style.font_size = 16
-    --LET g.title_text_style.bold = TRUE
-    --LET g.title_text_style.italic = TRUE
-    --LET g.is3D = TRUE
-
-    --LET g.legend.alignment="center"
-    --LET g.legend.position = "right"
-    --LET g.legend.max_lines = 1
-    --LET g.legend.text_style.color = "red"
-    --LET g.legend.text_style.font_name = "Arial"
-    --LET g.legend.text_style.font_size = 25
-    --LET g.legend.text_style.bold = FALSE
-    --LET g.legend.text_style.italic = FALSE
-    --LET g.chart_area.background_color.stroke = "red"
-    --LET g.chart_area.background_color.stroke_width= 100
+    CALL init_parameters()
     
     OPEN WINDOW geo_test WITH FORM "wc_googlecharts_geo_test"
     
@@ -119,7 +96,7 @@ END RECORD
             CALL gc_geo.draw("formonly.wc", g.*)
 
         ON ACTION example1 ATTRIBUTES(TEXT="Example 1")
-            CALL g.data_column.clear()
+            CALL init_parameters()
             CALL data.clear()
             
             LET g.data_column[1].label = "Country"
@@ -139,17 +116,12 @@ END RECORD
             
             LET g.data_col_count = g.data_column.getLength()
             LET g.data_row_count = data.getLength()
-
-            INITIALIZE g.region TO NULL
-            INITIALIZE g.display_mode TO NULL
-            CALL g.color_axis.colors.clear()
-            
             CALL map_array_to_data(base.TypeInfo.create(data), g.data, "col01,col02")
             
             CALL gc_geo.draw("formonly.wc", g.*)
 
         ON ACTION example2 ATTRIBUTES(TEXT="Example 2")
-            CALL g.data_column.clear()
+            CALL init_parameters()
             CALL data.clear()
             
             LET g.data_column[1].label = "Country"
@@ -189,7 +161,7 @@ END RECORD
             CALL gc_geo.draw("formonly.wc", g.*)
 
         ON ACTION example3 ATTRIBUTES(TEXT="Example 3")
-            CALL g.data_column.clear()
+            CALL init_parameters()
             CALL data.clear()
             
             LET g.data_column[1].label = "Country"
@@ -224,7 +196,7 @@ END RECORD
             CALL gc_geo.draw("formonly.wc", g.*)
 
         ON ACTION example4 ATTRIBUTES(TEXT="Example 4")
-            CALL g.data_column.clear()
+            CALL init_parameters()
             CALL data.clear()
             
             LET g.data_column[1].label = "Country"
@@ -310,7 +282,6 @@ END RECORD
             LET g.background_color.fill = "#81d4fa"
             LET g.dataless_region_color = "#f8bbd0"
             LET g.default_color = "#f5f5f5"
-            
             
             CALL map_array_to_data(base.TypeInfo.create(data), g.data, "col01,col02,col03")
             
@@ -406,4 +377,11 @@ DEFINE i INTEGER
     FOR i = (l_data_column.getLength()+1) TO 10
         CALL f.setElementText(SFMT("formonly.col%1", i USING "&&"), "")
     END FOR
+END FUNCTION
+
+
+PRIVATE FUNCTION init_parameters()
+    INITIALIZE g.* TO NULL
+    LET g.height = 275
+    LET g.width = 275
 END FUNCTION

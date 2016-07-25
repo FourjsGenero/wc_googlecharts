@@ -1,8 +1,10 @@
 IMPORT FGL gc_pie
 IMPORT util
 
-FUNCTION googlecharts_pie_test()
 DEFINE g gc_pie.pie_rec
+
+FUNCTION googlecharts_pie_test()
+
 DEFINE wc STRING
 DEFINE data DYNAMIC ARRAY OF RECORD
     label STRING,
@@ -14,75 +16,9 @@ DEFINE data DYNAMIC ARRAY OF RECORD
     text_style_font_name STRING,
     text_style_font_size INTEGER
 END RECORD
-DEFINE i INTEGER
 
-    INITIALIZE g.* TO NULL
+    CALL init_parameters()
 
-    -- Set the data
-    LET g.data_col_count = 3
-    LET g.data_row_count = 4
-    LET g.data_column[1].label = "Area"
-    LET g.data_column[1].type = "string"
-    LET g.data_column[2].label = "Sales"
-    LET g.data_column[2].type = "number"
-    LET g.data_column[3].role = "tooltip"
-    LET g.data_column[3].type = "string"
-
-    LET data[1].label = "North"      LET data[1].value = 1000
-    LET data[2].label = "East"       LET data[2].value = 2000
-    LET data[3].label = "South"      LET data[3].value = 3000
-    LET data[4].label = "West"       LET data[4].value = 4000
-
-    -- Set some minumum settings for the pie chart
-    LET g.chart_area.left = 50
-    LET g.chart_area.top = 50
-    LET g.chart_area.height = 200
-    LET g.chart_area.width = 200
-    LET g.height = 275
-    LET g.title = "Example Pie Chart"
-    LET g.width = 275
-    
-
-    -- Other settings can be set programmatically similar to ...
-    --LET g.title_text_style.color = "blue"
-    --LET g.title_text_style.font_name = "Arial"
-    --LET g.title_text_style.font_size = 16
-    --LET g.title_text_style.bold = TRUE
-    --LET g.title_text_style.italic = TRUE
-    --LET g.is3D = TRUE
-
-    --LET g.legend.alignment="center"
-    --LET g.legend.position = "right"
-    --LET g.legend.max_lines = 1
-    --LET g.legend.text_style.color = "red"
-    --LET g.legend.text_style.font_name = "Arial"
-    --LET g.legend.text_style.font_size = 25
-    --LET g.legend.text_style.bold = FALSE
-    --LET g.legend.text_style.italic = FALSE
-    --LET g.chart_area.background_color.stroke = "red"
-    --LET g.chart_area.background_color.stroke_width= 100
-
-    LET g.colors[1] = "#3366CC"
-    LET g.colors[2] = "#DC3912"
-    LET g.colors[3] = "#FF9900"
-    LET g.colors[4] = "#109618"
-    LET g.colors[5] = "#990099"
-    LET g.colors[6] = "#3B3EAC"
-    LET g.colors[7] = "#0099C6"
-    LET g.colors[8] = "#DD4477"
-    LET g.colors[9] = "#66AA00"
-    LET g.colors[10] = "#B82E2E"
-    LET g.colors[11] = "#316395"
-    LET g.colors[12] = "#994499"
-    LET g.colors[13] = "#22AA99"
-    LET g.colors[14] = "#AAAA11"
-    LET g.colors[15] = "#6633CC"
-    LET g.colors[16] = "#E67300"
-    LET g.colors[17] = "#8B0707"
-    LET g.colors[18] = "#329262"
-    LET g.colors[19] = "#5574A6"
-    LET g.colors[20] = "#3B3EAC"
-    
     OPEN WINDOW pie_test WITH FORM "wc_googlecharts_pie_test"
     
     DIALOG ATTRIBUTES(UNBUFFERED)
@@ -157,7 +93,7 @@ DEFINE i INTEGER
             CALL gc_pie.draw("formonly.wc", g.*)
 
          ON ACTION example1 ATTRIBUTES(TEXT="Example 1")
-            CALL g.data_column.clear()
+            CALL init_parameters()
             CALL data.clear()
 
             LET g.title = "My Daily Activities"
@@ -181,7 +117,7 @@ DEFINE i INTEGER
             CALL gc_pie.draw("formonly.wc", g.*)
 
          ON ACTION example2 ATTRIBUTES(TEXT="Example 2")
-            CALL g.data_column.clear()
+            CALL init_parameters()
             CALL data.clear()
 
             LET g.data_col_count = 2
@@ -205,7 +141,7 @@ DEFINE i INTEGER
             CALL gc_pie.draw("formonly.wc", g.*)
 
          ON ACTION example3 ATTRIBUTES(TEXT="Example 3")
-            CALL g.data_column.clear()
+            CALL init_parameters()
             CALL data.clear()
 
             LET g.data_col_count = 2
@@ -229,7 +165,7 @@ DEFINE i INTEGER
             CALL gc_pie.draw("formonly.wc", g.*)
 
         ON ACTION example4 ATTRIBUTES(TEXT="Example 4")
-            CALL g.data_column.clear()
+            CALL init_parameters()
             CALL data.clear()
 
             LET g.data_col_count = 2
@@ -254,7 +190,7 @@ DEFINE i INTEGER
             CALL gc_pie.draw("formonly.wc", g.*)
 
         ON ACTION example5 ATTRIBUTES(TEXT="Example 5")
-            CALL g.data_column.clear()
+            CALL init_parameters()
             CALL data.clear()
 
             LET g.data_col_count = 2
@@ -301,7 +237,7 @@ DEFINE i INTEGER
             CALL gc_pie.draw("formonly.wc", g.*)       
 
         ON ACTION example6 ATTRIBUTES(TEXT="Example 6")
-            CALL g.data_column.clear()
+            CALL init_parameters()
             CALL data.clear()
 
             LET g.data_col_count = 2
@@ -328,7 +264,7 @@ DEFINE i INTEGER
             CALL gc_pie.draw("formonly.wc", g.*)      
    
         ON ACTION example7 ATTRIBUTES(TEXT="Example 7")
-            CALL g.data_column.clear()
+            CALL init_parameters()
             CALL data.clear()
 
             LET g.data_col_count = 2
@@ -350,14 +286,6 @@ DEFINE i INTEGER
             LET g.data_row_count = data.getLength()
             CALL map_array_to_slice(base.TypeInfo.create(data), g.slices,"color","offset","text_style_color","text_style_font_name","text_style_font_size")
             CALL gc_pie.draw("formonly.wc", g.*)       
-
-        ON ACTION random ATTRIBUTES(TEXT="Random")
-            -- randomise data
-            FOR i = 1 TO data.getLength()
-                LET data[i].value = util.Math.rand(10000)+1
-            END FOR
-            CALL map_array_to_data(base.TypeInfo.create(data), g.data, "label","value","tooltip")
-            CALL gc_pie.draw("formonly.wc", g.*)
             
         ON ACTION close
             EXIT DIALOG
@@ -427,4 +355,38 @@ DEFINE c STRING
         LET f = nl.item(1)
         RETURN f.getAttribute("value")
     END IF
+END FUNCTION
+
+
+
+PRIVATE FUNCTION init_parameters()
+    INITIALIZE g.* TO NULL
+    LET g.chart_area.left = 50
+    LET g.chart_area.top = 50
+    LET g.chart_area.height = 200
+    LET g.chart_area.width = 200
+    LET g.height = 275
+    LET g.width = 275
+
+    -- remove if NULL colors array can be passed to web component
+    LET g.colors[1] = "#3366CC"
+    LET g.colors[2] = "#DC3912"
+    LET g.colors[3] = "#FF9900"
+    LET g.colors[4] = "#109618"
+    LET g.colors[5] = "#990099"
+    LET g.colors[6] = "#3B3EAC"
+    LET g.colors[7] = "#0099C6"
+    LET g.colors[8] = "#DD4477"
+    LET g.colors[9] = "#66AA00"
+    LET g.colors[10] = "#B82E2E"
+    LET g.colors[11] = "#316395"
+    LET g.colors[12] = "#994499"
+    LET g.colors[13] = "#22AA99"
+    LET g.colors[14] = "#AAAA11"
+    LET g.colors[15] = "#6633CC"
+    LET g.colors[16] = "#E67300"
+    LET g.colors[17] = "#8B0707"
+    LET g.colors[18] = "#329262"
+    LET g.colors[19] = "#5574A6"
+    LET g.colors[20] = "#3B3EAC"
 END FUNCTION
