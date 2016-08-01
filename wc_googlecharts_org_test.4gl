@@ -52,7 +52,7 @@ END RECORD
             CALL data.clear()
 
             LET g.allow_html = TRUE
-            LET g.title = "My Daily Activities"
+            LET g.title = "Org Chart"
 
             LET g.data_col_count = 4
             LET g.data_column[1].label = "ID"
@@ -75,6 +75,47 @@ END RECORD
             
             CALL gc_org.draw("formonly.wc", g.*)
 
+        ON ACTION example2  ATTRIBUTES(TEXT="Example 2")
+            CALL init_parameters()
+            CALL data.clear()
+
+            LET g.allow_html = TRUE
+            LET g.title = "Breeding Chart"
+
+            LET g.data_col_count = 4
+            LET g.data_column[1].label = "ID"
+            LET g.data_column[1].type = "string"
+            LET g.data_column[2].label = "Parent"
+            LET g.data_column[2].type = "string"
+            LET g.data_column[3].label = "ToolTip"
+            LET g.data_column[3].type = "string"
+            LET g.data_column[4].label = "Name"
+            LET g.data_column[4].type = "string"
+            
+            LET data[1].id = "Four Jays"            LET data[1].parent_id = NULL 
+            
+            LET data[2].id = "Nuclear Canyon"       LET data[2].parent_id = "Four Jays" 
+            LET data[3].id = "Deblo"                LET data[3].parent_id = "Four Jays"
+
+            LET data[4].id = "No Nukes"             LET data[4].parent_id = "Nuclear Canyon"
+            LET data[5].id = "Babylon"              LET data[5].parent_id = "Nuclear Canyon"
+            LET data[6].id = "Wee Win"              LET data[6].parent_id = "Deblo"
+            LET data[7].id = "Lisa Harrow"          LET data[7].parent_id = "Deblo"
+
+            LET data[8].id = "Oil Burner"           LET data[8].parent_id = "No Nukes"
+            LET data[9].id = "Gidget Lobell"        LET data[9].parent_id = "No Nukes"
+            LET data[10].id = "Tarport Effrat"      LET data[10].parent_id = "Babylon"
+            LET data[11].id = "Sterling Princess"   LET data[11].parent_id = "Babylon"
+            LET data[12].id = "Out to Win"          LET data[12].parent_id = "Wee Win"
+            LET data[13].id = "Foaming Lass"        LET data[13].parent_id = "Wee Win"
+            LET data[14].id = "Lumber Dream"        LET data[14].parent_id = "Lisa Harrow"
+            LET data[15].id = "First Actress"       LET data[15].parent_id = "Lisa Harrow"
+            
+            CALL map_array_to_data(base.TypeInfo.create(data), g.data, "id","parent_id","tooltip","text")
+            LET g.data_row_count = data.getLength()
+            
+            CALL gc_org.draw("formonly.wc", g.*)
+        
         ON ACTION close
             EXIT DIALOG
 
