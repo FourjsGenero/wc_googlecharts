@@ -72,6 +72,10 @@
           <File filePath="wc_googlecharts_line_test.4gl"/>
           <File filePath="wc_googlecharts_line_test.per"/>
         </VirtualFolder>
+        <VirtualFolder label="org">
+          <File filePath="wc_googlecharts_org_test.4gl"/>
+          <File filePath="wc_googlecharts_org_test.per"/>
+        </VirtualFolder>
         <VirtualFolder label="pie">
           <File filePath="wc_googlecharts_pie_test.4gl"/>
           <File filePath="wc_googlecharts_pie_test.per"/>
@@ -86,6 +90,8 @@
         <File filePath="webcomponents/gc_geo/gc_geo.html"/>
         <File excludeFromLink="true" filePath="gc_line.4gl"/>
         <File filePath="webcomponents/gc_line/gc_line.html"/>
+        <File excludeFromLink="true" filePath="gc_org.4gl"/>
+        <File filePath="webcomponents/gc_org/gc_org.html"/>
         <File excludeFromLink="true" filePath="gc_pie.4gl"/>
         <File filePath="webcomponents/gc_pie/gc_pie.html"/>
       </VirtualFolder>

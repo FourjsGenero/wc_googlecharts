@@ -1,0 +1,85 @@
+LAYOUT (TEXT="GoogleCharts Org Test")
+HBOX
+FOLDER
+
+PAGE (TEXT="Data")
+TABLE
+{
+[d01       |d02       |d03       |d04       ]
+[d01       |d02       |d03       |d04       ]
+[d01       |d02       |d03       |d04       ]
+[d01       |d02       |d03       |d04       ]
+[d01       |d02       |d03       |d04       ]
+
+}
+END
+END
+
+PAGE (TEXT="Rendering")
+GRID
+{
+Width-Height        [r01      |r02      ]
+Allow HTML          [r03                ]
+}
+END
+END
+
+PAGE (TEXT="Title")
+GRID
+{
+Title      [t01                ]
+}
+END
+END
+
+PAGE (TEXT="Background")
+GRID
+{
+Fill         [bk01      ]
+Stroke       [bk02      ]  
+Stroke-Width [bk03      ]    
+}
+END
+END
+
+END
+GROUP (TEXT="Pie")
+GRID
+{
+[wc01                                                      ]
+[                                                          ]
+[                                                          ]
+[                                                          ]
+[                                                          ]
+[                                                          ]
+[                                                          ]
+[                                                          ]
+[                                                          ]
+[                                                          ]
+}
+END
+END
+END 
+END 
+ATTRIBUTES
+
+EDIT d01 = formonly.data_id, SCROLL, TITLE="ID";
+EDIT d02 = formonly.data_parent_id, SCROLL, TITLE="Parent";
+EDIT d03 = formonly.data_tooltip, SCROLL, TITLE="Tooltip";
+EDIT d04 = formonly.data_text, SCROLL, TITLE="Text";
+
+
+EDIT t01 = formonly.title, SCROLL;
+
+EDIT r01 = formonly.WIDTH, NOT NULL;
+EDIT r02 = formonly.HEIGHT, NOT NULL;
+CHECKBOX r03 = formonly.allow_html, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
+
+EDIT bk01 = formonly.background_color_fill;
+EDIT bk02 = formonly.background_color_stroke;
+SPINEDIT bk03 = formonly.background_color_stroke_width, VALUEMIN=0;
+
+WEBCOMPONENT wc01 = formonly.wc, COMPONENTTYPE="gc_org", SIZEPOLICY=FIXED, STRETCH=NONE, TABINDEX=0, HEIGHT=300 PIXELS, WIDTH=300 PIXELS;
+
+INSTRUCTIONS
+SCREEN RECORD data_scr(data_id, data_parent_id, data_tooltip,  data_text)

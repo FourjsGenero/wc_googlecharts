@@ -1,0 +1,99 @@
+<html>
+   <head>
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <script type='text/javascript'>
+   google.charts.load("current", {packages:["orgchart"]});
+   google.charts.setOnLoadCallback(drawChart);
+
+   function drawChart() {
+   }
+
+   
+   
+   onICHostReady = function(version) {
+      var myProps;
+
+      if ( version != 1.0 ) {
+         alert('Invalid API version');
+         return;
+      }
+
+      draw_org = function(p) {
+
+         properties = eval('(' + p + ')');
+
+         var data = new google.visualization.DataTable();
+
+         /* New */
+         var colLength = parseInt(properties.data_col_count);
+         var rowLength = parseInt(properties.data_row_count);
+
+         for (var k=0; k < colLength; k++) {
+            data.addColumn(properties.data_column[k].type, properties.data_column[k].label);
+         }
+
+         data.addRows(rowLength);
+
+         for (var i=0; i < rowLength; i++) {
+            for (var j=0; j < colLength; j++) {
+                data.setValue(i,j, properties.data[i][j]);
+            }
+         }
+
+         // formattted values, must be a better way of doing this to avoid hard coding
+         for (var i=0; i < rowLength; i++) {
+            data.setCell(i,0,data.getValue(i,0),data.getValue(i,3));
+         }
+ 
+         var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
+
+         var options  = {
+                          allowHtml: properties.allow_html,  
+                          backgroundColor: {
+                                            strokeWidth: properties.background_color.stroke_width,
+                                            stroke: properties.background_color.stroke,
+                                            fill: properties.background_color.fill
+                                           } ,
+                          height: properties.height,
+                          title: properties.title,
+                          width: properties.width
+                        
+                        };
+
+         chart.draw(data, options);
+
+         google.visualization.events.addListener(chart,'select', selectHandler);
+         google.visualization.events.addListener(chart,'onmouseover', onmouseoverHandler);
+
+         function selectHandler(e) {
+            var selection = chart.getSelection();
+            var item = selection[0];
+            var idx = item.row + 1;
+
+            chartClicked(idx);
+         }
+
+         chartClicked = function( idx ) {
+            gICAPI.SetFocus();
+            gICAPI.SetData(idx);
+            gICAPI.Action('select');
+         }
+
+         function onmouseoverHandler(e) {
+            var item = [e.row];
+            var idx = parseInt(item) + 1;
+            gICAPI.SetFocus();
+            gICAPI.SetData(idx);
+            gICAPI.Action('mouseover');
+         }
+      }
+   }
+
+
+   </script>
+   </head>
+   <body>
+      <div id='chart_div'></div>
+   </body>
+</html>
+

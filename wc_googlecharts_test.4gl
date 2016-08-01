@@ -24,8 +24,8 @@ MAIN
         ON ACTION geo ATTRIBUTES(TEXT="Geo")
             CALL googlecharts_geo_test()
             
-        ON ACTION visualization ATTRIBUTES(TEXT="Visualization")
-            CALL FGL_WINMESSAGE("Info","Not yet implemented","stop")
+        ON ACTION org ATTRIBUTES(TEXT="Organisation Chart")
+            CALL googlecharts_org_test()
             
         ON ACTION close
             EXIT MENU
