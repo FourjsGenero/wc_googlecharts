@@ -27,35 +27,35 @@
          data.addRows(1);        
          
          data.setValue(0, 0, properties.data_label); 
-         data.setValue(0, 1, parseFloat(properties.data_value));
+         data.setValue(0, 1, properties.data_value);
 
          var chart = new google.visualization.Gauge(document.getElementById('chart_div'));   
          
          var options = {animation:{
-                            duration: parseInt(properties.animation.duration),
+                            duration: properties.animation.duration,
                             easing: properties.animation.easing
                         },
                         greenColor: properties.green_color,
-                        greenFrom: parseFloat(properties.green_from),
-                        greenTo: parseFloat(properties.green_to),
-                        height: parseInt(properties.height),
+                        greenFrom: properties.green_from,
+                        greenTo: properties.green_to,
+                        height: properties.height,
                         majorTicks: properties.major_ticks,
-                        max: parseFloat(properties.max), 
-                        min: parseFloat(properties.min), 
-                        minorTicks: parseInt(properties.minor_ticks),
+                        max: properties.max, 
+                        min: properties.min, 
+                        minorTicks: properties.minor_ticks,
                         redColor: properties.red_color, 
-                        redFrom: parseFloat(properties.red_from), 
-                        redTo: parseFloat(properties.red_to),
-                        width: parseInt(properties.width),
+                        redFrom: properties.red_from, 
+                        redTo: properties.red_to,
+                        width: properties.width,
                         yellowColor: properties.yellow_color, 
-                        yellowFrom: parseFloat(properties.yellow_from), 
-                        yellowTo: parseFloat(properties.yellow_to) };
+                        yellowFrom: properties.yellow_from, 
+                        yellowTo: properties.yellow_to };
          chart.draw(data, options); 
          
-         document.getElementById("gauge_div_clickable").setAttribute("style", "position:absolute; z-index:2;top:0px;left:0px;width:"+parseInt(properties.width)+"px;height:"+parseInt(properties.height)+"px;");
+         document.getElementById("gauge_div_clickable").setAttribute("style", "position:absolute; z-index:2;top:0px;left:0px;width:"+properties.width+"px;height:"+properties.height+"px;");
 
          draw_gauge_value = function(v) {
-            data.setValue(0, 1, parseFloat(v));
+            data.setValue(0, 1, v);
             chart.draw(data, options);
         }
     }
