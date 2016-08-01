@@ -10,16 +10,9 @@ PUBLIC TYPE org_rec RECORD
 
     data DYNAMIC ARRAY WITH DIMENSION 2 OF STRING,
 
+    allow_collapse BOOLEAN,
     allow_html BOOLEAN,
-    background_color RECORD
-        stroke_width INTEGER,
-        stroke STRING,
-        fill STRING
-    END RECORD,
-
-    height INTEGER,
-    title STRING,
-    width INTEGER
+    size STRING
 END RECORD
 
  

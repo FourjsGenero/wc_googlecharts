@@ -21,21 +21,8 @@ END RECORD
         INPUT ARRAY data FROM data_scr.* ATTRIBUTES(WITHOUT DEFAULTS=TRUE)
         END INPUT
 
-        INPUT g.title
-        FROM title
-        ATTRIBUTES(WITHOUT DEFAULTS=TRUE)
+        INPUT BY NAME g.size, g.allow_collapse, g.allow_html ATTRIBUTES(WITHOUT DEFAULTS=TRUE) 
         END INPUT
-
-        INPUT BY NAME g.allow_html, g.width, g.height ATTRIBUTES(WITHOUT DEFAULTS=TRUE) 
-        END INPUT
-
-        INPUT g.background_color.fill, g.background_color.stroke, g.background_color.stroke_width
-        FROM background_color_fill, background_color_stroke, background_color_stroke_width
-        ATTRIBUTES (WITHOUT DEFAULTS=TRUE)
-        END INPUT
-
-        
-
         
         -- Web Component
         INPUT BY NAME wc ATTRIBUTES(WITHOUT DEFAULTS=TRUE) 
@@ -52,7 +39,6 @@ END RECORD
             CALL data.clear()
 
             LET g.allow_html = TRUE
-            LET g.title = "Org Chart"
 
             LET g.data_col_count = 4
             LET g.data_column[1].label = "ID"
@@ -78,10 +64,7 @@ END RECORD
         ON ACTION example2  ATTRIBUTES(TEXT="Example 2")
             CALL init_parameters()
             CALL data.clear()
-
-            LET g.allow_html = TRUE
-            LET g.title = "Breeding Chart"
-
+        
             LET g.data_col_count = 4
             LET g.data_column[1].label = "ID"
             LET g.data_column[1].type = "string"
@@ -122,7 +105,7 @@ END RECORD
         ON ACTION cancel
             EXIT DIALOG
     END DIALOG
-    CLOSE WINDOW pie_test
+    CLOSE WINDOW org_test
 END FUNCTION
 
 
@@ -174,6 +157,4 @@ END FUNCTION
 PRIVATE FUNCTION init_parameters()
     INITIALIZE g.* TO NULL
 
-    LET g.height = 275
-    LET g.width = 275
 END FUNCTION

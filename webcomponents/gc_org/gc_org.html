@@ -48,16 +48,9 @@
          var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
 
          var options  = {
+                          allowCollapse: properties.allow_collapse,
                           allowHtml: properties.allow_html,  
-                          backgroundColor: {
-                                            strokeWidth: properties.background_color.stroke_width,
-                                            stroke: properties.background_color.stroke,
-                                            fill: properties.background_color.fill
-                                           } ,
-                          height: properties.height,
-                          title: properties.title,
-                          width: properties.width
-                        
+                          size: properties.size
                         };
 
          chart.draw(data, options);

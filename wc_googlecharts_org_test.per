@@ -18,32 +18,16 @@ END
 PAGE (TEXT="Rendering")
 GRID
 {
-Width-Height        [r01      |r02      ]
+Size                [r01                ]
+Allow Collapse      [r02                ]
 Allow HTML          [r03                ]
 }
 END
 END
 
-PAGE (TEXT="Title")
-GRID
-{
-Title      [t01                ]
-}
-END
-END
-
-PAGE (TEXT="Background")
-GRID
-{
-Fill         [bk01      ]
-Stroke       [bk02      ]  
-Stroke-Width [bk03      ]    
-}
-END
-END
 
 END
-GROUP (TEXT="Pie")
+GROUP (TEXT="Org")
 GRID
 {
 [wc01                                                      ]
@@ -68,16 +52,9 @@ EDIT d02 = formonly.data_parent_id, SCROLL, TITLE="Parent";
 EDIT d03 = formonly.data_tooltip, SCROLL, TITLE="Tooltip";
 EDIT d04 = formonly.data_text, SCROLL, TITLE="Text";
 
-
-EDIT t01 = formonly.title, SCROLL;
-
-EDIT r01 = formonly.WIDTH, NOT NULL;
-EDIT r02 = formonly.HEIGHT, NOT NULL;
+COMBOBOX r01 = formonly.SIZE, ITEMS=("small","medium","large");
+CHECKBOX r02 = formonly.allow_collapse, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
 CHECKBOX r03 = formonly.allow_html, VALUEUNCHECKED=FALSE, VALUECHECKED=TRUE;
-
-EDIT bk01 = formonly.background_color_fill;
-EDIT bk02 = formonly.background_color_stroke;
-SPINEDIT bk03 = formonly.background_color_stroke_width, VALUEMIN=0;
 
 WEBCOMPONENT wc01 = formonly.wc, COMPONENTTYPE="gc_org", SIZEPOLICY=FIXED, STRETCH=NONE, TABINDEX=0, HEIGHT=300 PIXELS, WIDTH=300 PIXELS;
 
