@@ -3,22 +3,30 @@
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>   
 
         <script type="text/javascript">
-            google.charts.load('current', {'packages':['gauge']});
-            google.charts.setOnLoadCallback(drawChart);
 
-   function drawChart() {        
-   }    
-     
    onICHostReady = function(version) {
-      var myProps;
+      var loaded;
 
       if ( version != 1.0 ) {
          alert('Invalid API version');
          return;
       }
 
+      loaded = "N";
+      
+      is_loaded = function() {
+            return loaded;
+      }
+
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(chart_loaded);
+
+      function chart_loaded() { 
+            loaded = "Y";
+       } 
+
       draw_gauge = function(p) {   
-   
+        
          properties = eval('(' + p + ')');
         
          var data = new google.visualization.DataTable(); 

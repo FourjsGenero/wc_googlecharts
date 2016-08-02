@@ -6,6 +6,8 @@ DEFINE g gc_gauge.gauge_rec
 
 DEFINE wc STRING
 
+DEFINE dummy STRING
+
     LET g.data_label = "Title"
     LET g.data_value = 50
 
@@ -40,9 +42,12 @@ DEFINE wc STRING
     OPEN WINDOW gauge_test WITH FORM "wc_googlecharts_gauge_test"
 
     -- TODO investigate why need these two lines
-    CALL ui.Interface.refresh()
-    SLEEP 1
-    
+    --CALL ui.Interface.refresh()
+    --SLEEP 2
+    IF NOT gc_gauge.is_loaded("formonly.wc",5) THEN
+        EXIT PROGRAM 1
+    END IF
+   
     DIALOG ATTRIBUTES(UNBUFFERED)
         -- Single record
         INPUT BY NAME g.data_label, g.data_value ATTRIBUTES(WITHOUT DEFAULTS=TRUE)
