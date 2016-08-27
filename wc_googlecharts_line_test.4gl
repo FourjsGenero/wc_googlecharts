@@ -22,6 +22,12 @@ END RECORD
 
     OPEN WINDOW line_test WITH FORM "wc_googlecharts_line_test"
     
+    IF NOT gc_line.is_loaded("formonly.wc",15) THEN
+        CALL FGL_WINMESSAGE("Error","Problem loading Web Component","stop")
+        CLOSE WINDOW line_test
+        RETURN
+    END IF
+    
     DIALOG ATTRIBUTES(UNBUFFERED)
         INPUT ARRAY g.data_column FROM data_column_scr.* ATTRIBUTES(WITHOUT DEFAULTS=TRUE)
             ON CHANGE label

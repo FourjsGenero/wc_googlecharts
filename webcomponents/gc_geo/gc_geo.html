@@ -4,19 +4,27 @@
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
         <script type="text/javascript">
-            google.charts.load('current', {'packages':['geochart']});
-            google.charts.setOnLoadCallback(drawChart);
 
-   function drawChart() {        
-   }    
-     
    onICHostReady = function(version) {
-      var myProps;
+      var loaded;
 
       if ( version != 1.0 ) {
          alert('Invalid API version');
          return;
       }
+
+      loaded = "N";
+      
+      is_loaded = function() {
+            return loaded;
+      }
+
+      google.charts.load('current', {'packages':['geochart']});
+      google.charts.setOnLoadCallback(chart_loaded);
+
+      function chart_loaded() { 
+            loaded = "Y";
+       } 
 
       draw_geo = function(p) {   
    

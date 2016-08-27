@@ -21,6 +21,13 @@ END RECORD
     CALL init_parameters()
     
     OPEN WINDOW column_test WITH FORM "wc_googlecharts_column_test"
+
+    IF NOT gc_column.is_loaded("formonly.wc",15) THEN
+        CALL FGL_WINMESSAGE("Error","Problem loading Web Component","stop")
+        CLOSE WINDOW column_test
+        RETURN
+    END IF
+
     
     DIALOG ATTRIBUTES(UNBUFFERED)
         INPUT ARRAY g.data_column FROM data_column_scr.* ATTRIBUTES(WITHOUT DEFAULTS=TRUE)

@@ -107,3 +107,23 @@ DEFINE result STRING
     LET s = util.JSON.stringify(pie)
     CALL ui.Interface.frontCall("webcomponent","call",[fieldname,"draw_pie",s],[result])
 END FUNCTION
+
+FUNCTION is_loaded(fieldname, timeout)
+DEFINE fieldname STRING
+DEFINE timeout INTEGER
+
+DEFINE loaded STRING
+
+    WHILE timeout > 0
+        TRY
+            CALL ui.Interface.frontCall("webcomponent","call",[fieldname,"is_loaded"],[loaded])
+        CATCH
+        END TRY
+        IF loaded = "Y" THEN
+            RETURN TRUE
+        END IF
+        SLEEP 1
+        LET timeout = timeout - 1
+    END WHILE
+    RETURN FALSE
+END FUNCTION

@@ -21,6 +21,12 @@ END RECORD
     CALL init_parameters()
     
     OPEN WINDOW geo_test WITH FORM "wc_googlecharts_geo_test"
+
+    IF NOT gc_geo.is_loaded("formonly.wc",15) THEN
+        CALL FGL_WINMESSAGE("Error","Problem loading Web Component","stop")
+        CLOSE WINDOW gauge_test
+        RETURN
+    END IF
     
     DIALOG ATTRIBUTES(UNBUFFERED)
         INPUT ARRAY g.data_column FROM data_column_scr.* ATTRIBUTES(WITHOUT DEFAULTS=TRUE)

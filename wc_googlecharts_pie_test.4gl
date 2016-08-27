@@ -20,6 +20,12 @@ END RECORD
     CALL init_parameters()
 
     OPEN WINDOW pie_test WITH FORM "wc_googlecharts_pie_test"
+
+    IF NOT gc_pie.is_loaded("formonly.wc",15) THEN
+        CALL FGL_WINMESSAGE("Error","Problem loading Web Component","stop")
+        CLOSE WINDOW pie_test
+        RETURN
+    END IF
     
     DIALOG ATTRIBUTES(UNBUFFERED)
         INPUT ARRAY data FROM data_scr.* ATTRIBUTES(WITHOUT DEFAULTS=TRUE)
