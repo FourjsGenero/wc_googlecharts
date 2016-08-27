@@ -41,11 +41,10 @@ DEFINE dummy STRING
     
     OPEN WINDOW gauge_test WITH FORM "wc_googlecharts_gauge_test"
 
-    -- TODO investigate why need these two lines
-    --CALL ui.Interface.refresh()
-    --SLEEP 2
-    IF NOT gc_gauge.is_loaded("formonly.wc",5) THEN
-        EXIT PROGRAM 1
+    IF NOT gc_gauge.is_loaded("formonly.wc",15) THEN
+        CALL FGL_WINMESSAGE("Error","Problem loading Web Component","stop")
+        CLOSE WINDOW gauge_test
+        RETURN
     END IF
    
     DIALOG ATTRIBUTES(UNBUFFERED)
