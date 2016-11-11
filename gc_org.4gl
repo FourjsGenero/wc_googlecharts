@@ -20,11 +20,11 @@ FUNCTION draw(fieldname, org)
 DEFINE fieldname STRING
 DEFINE org org_rec
 
-DEFINE s STRING
+DEFINE jo util.JSONObject
 DEFINE result STRING
 
-    LET s = util.JSON.stringify(org)
-    CALL ui.Interface.frontCall("webcomponent","call",[fieldname,"draw_org",s],[result])
+    LET jo = util.JSONObject.fromFGL(org)
+    CALL ui.Interface.frontCall("webcomponent","call",[fieldname,"draw_org",jo.toString()],[result])
 END FUNCTION
 
 FUNCTION is_loaded(fieldname, timeout)

@@ -28,11 +28,11 @@ FUNCTION draw(fieldname, gauge)
 DEFINE fieldname STRING
 DEFINE gauge gauge_rec
 
-DEFINE s STRING
+DEFINE jo util.JSONObject
 DEFINE result STRING
 
-    LET s = util.JSON.stringify(gauge)
-    CALL ui.Interface.frontCall("webcomponent","call",[fieldname,"draw_gauge",s],[result])
+    LET jo = util.JSONObject.fromFGL(gauge)
+    CALL ui.Interface.frontCall("webcomponent","call",[fieldname,"draw_gauge",jo.toString()],[result])
 END FUNCTION
 
 FUNCTION update(fieldname, val)

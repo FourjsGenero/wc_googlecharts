@@ -19,7 +19,7 @@ PUBLIC TYPE pie_rec RECORD
 
     data DYNAMIC ARRAY WITH DIMENSION 2 OF STRING,
 
-    background_color RECORD
+    background_color RECORD 
         stroke_width INTEGER,
         stroke STRING,
         fill STRING
@@ -101,11 +101,11 @@ FUNCTION draw(fieldname, pie)
 DEFINE fieldname STRING
 DEFINE pie pie_rec
 
-DEFINE s STRING
+DEFINE jo util.JSONObject
 DEFINE result STRING
 
-    LET s = util.JSON.stringify(pie)
-    CALL ui.Interface.frontCall("webcomponent","call",[fieldname,"draw_pie",s],[result])
+    LET jo = util.JSONObject.fromFGL(pie)
+    CALL ui.Interface.frontCall("webcomponent","call",[fieldname,"draw_pie",jo.toString()],[result])
 END FUNCTION
 
 FUNCTION is_loaded(fieldname, timeout)

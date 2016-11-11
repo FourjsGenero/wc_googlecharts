@@ -169,15 +169,16 @@ END RECORD
         
     
  
-FUNCTION draw(fieldname, c)
+FUNCTION draw(fieldname, line)
 DEFINE fieldname STRING
-DEFINE c line_rec
+DEFINE line line_rec
 
 DEFINE s STRING
+DEFINE jo util.JSONObject
 DEFINE result STRING
 
-    LET s = util.JSON.stringify(c)
-    CALL ui.Interface.frontCall("webcomponent","call",[fieldname,"draw_line",s],[result])
+    LET jo = util.JSONObject.fromFGL(line)
+    CALL ui.Interface.frontCall("webcomponent","call",[fieldname,"draw_line",jo.toString()],[result])
 END FUNCTION
 
 

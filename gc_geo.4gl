@@ -69,15 +69,15 @@ PUBLIC TYPE geo_rec RECORD
     width INTEGER
 END RECORD
 
-FUNCTION draw(fieldname, c)
+FUNCTION draw(fieldname, geo)
 DEFINE fieldname STRING
-DEFINE c geo_rec
+DEFINE geo geo_rec
 
-DEFINE s STRING
+DEFINE jo util.JSONObject
 DEFINE result STRING
 
-    LET s = util.JSON.stringify(c)
-    CALL ui.Interface.frontCall("webcomponent","call",[fieldname,"draw_geo",s],[result])
+    LET jo = util.JSONObject.fromFGL(geo)
+    CALL ui.Interface.frontCall("webcomponent","call",[fieldname,"draw_geo",jo.toString()],[result])
 END FUNCTION
 
 

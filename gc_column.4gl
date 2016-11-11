@@ -171,15 +171,15 @@ END RECORD
         
     
  
-FUNCTION draw(fieldname, c)
+FUNCTION draw(fieldname, col)
 DEFINE fieldname STRING
-DEFINE c column_rec
+DEFINE col column_rec
 
-DEFINE s STRING
+DEFINE jo util.JSONObject
 DEFINE result STRING
 
-    LET s = util.JSON.stringify(c)
-    CALL ui.Interface.frontCall("webcomponent","call",[fieldname,"draw_column",s],[result])
+    LET jo = util.JSONObject.fromFGL(col)
+    CALL ui.Interface.frontCall("webcomponent","call",[fieldname,"draw_column",jo.toString()],[result])
 END FUNCTION
 
 
