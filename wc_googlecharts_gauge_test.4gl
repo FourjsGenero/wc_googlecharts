@@ -5,9 +5,7 @@ FUNCTION googlecharts_gauge_test()
 DEFINE g gc_gauge.gauge_rec
 
 DEFINE wc STRING
-
-DEFINE dummy STRING
-
+   
     LET g.data_label = "Title"
     LET g.data_value = 50
 

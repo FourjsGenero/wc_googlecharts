@@ -4,7 +4,7 @@ MAIN
     CLOSE WINDOW SCREEN
     CALL ui.Interface.loadStyles("wc_googlecharts_test")
     OPEN WINDOW googlechart_test WITH FORM "wc_googlecharts_test" ATTRIBUTES(TEXT="GoogleCharts Test")
-    DISPLAY FGL_GETENV("FGLIMAGEPATH")
+
     MENU ""
         BEFORE MENU
             #CALL googlecharts_pie_test()
