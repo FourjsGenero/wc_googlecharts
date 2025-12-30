@@ -130,7 +130,7 @@ END RECORD
             CALL init_parameters()
             CALL data.clear()
             
-            LET g.data_column[1].label = "Country"
+            LET g.data_column[1].label = "City"
             LET g.data_column[1].type = "string"
 
             LET g.data_column[2].label = "Population"
@@ -165,6 +165,7 @@ END RECORD
             CALL map_array_to_data(base.TypeInfo.create(data), g.data, "col01,col02,col03")
             
             CALL gc_geo.draw("formonly.wc", g.*)
+            ERROR "Note: Because markers require geocoding, you'll need a mapsApiKey"
 
         ON ACTION example3 ATTRIBUTES(TEXT="Example 3")
             CALL init_parameters()
@@ -200,6 +201,7 @@ END RECORD
             CALL map_array_to_data(base.TypeInfo.create(data), g.data, "col01,col02,col03")
             
             CALL gc_geo.draw("formonly.wc", g.*)
+            ERROR "Note: Because markers require geocoding, you'll need a mapsApiKey"
 
         ON ACTION example4 ATTRIBUTES(TEXT="Example 4")
             CALL init_parameters()

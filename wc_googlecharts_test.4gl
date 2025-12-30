@@ -6,9 +6,6 @@ MAIN
     OPEN WINDOW googlechart_test WITH FORM "wc_googlecharts_test" ATTRIBUTES(TEXT="GoogleCharts Test")
 
     MENU ""
-        BEFORE MENU
-            #CALL googlecharts_pie_test()
-            
         ON ACTION gauge ATTRIBUTES(TEXT="Gauge")
             CALL googlecharts_gauge_test()
 

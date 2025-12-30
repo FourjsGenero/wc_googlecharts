@@ -19,8 +19,9 @@ DEFINE data DYNAMIC ARRAY OF RECORD
 END RECORD
 
     CALL init_parameters()
-    
+
     OPEN WINDOW column_test WITH FORM "wc_googlecharts_column_test"
+    CALL ui.Interface.refresh() -- not sure why this is needed but it seems to help make sure the is_loaded call is present
 
     IF NOT gc_column.is_loaded("formonly.wc",15) THEN
         CALL FGL_WINMESSAGE("Error","Problem loading Web Component","stop")
@@ -200,34 +201,6 @@ END RECORD
             CALL map_array_to_data(base.TypeInfo.create(data), g.data, "col01,col02,col03,col04,col05,col06,col07")
             CALL gc_column.draw("formonly.wc", g.*)
 
-        ON ACTION example4 ATTRIBUTES(TEXT="Example 4")
-            CALL init_parameters()
-            CALL data.clear()
-
-            LET g.data_column[1].type = "string"
-            LET g.data_column[2].type = "number"
-            LET g.data_column[3].type = "string"
-            LET g.data_column[3].role = "style"
-
-
-           
-
-            LET data[1].col01 = "The Wine" LET data[1].col02 = "50"   LET data[1].col03 = "color:blue"
-            LET data[2].col01 = "The People"  LET data[2].col02 = "0" LET data[2].col03 = "color:green"
-            LET data[3].col01 = "The Food" LET data[3].col02 = "50"   LET data[3].col03 = "color:red"
-
-            LET g.data_col_count = g.data_column.getLength()
-            LET g.data_row_count = data.getLength()
-
-           
-            LET g.title = "Why People Love France"
-            LET g.legend.position = "top"
-            LET g.legend.max_lines = 1
-
-            CALL map_array_to_data(base.TypeInfo.create(data), g.data, "col01,col02,col03")
-            CALL gc_column.draw("formonly.wc", g.*)
-        
-            
         ON ACTION close
             EXIT DIALOG
 
